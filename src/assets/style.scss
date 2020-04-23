@@ -1,0 +1,18 @@
+* {
+  font-family: "Nunito Sans", sans-serif !important;
+}
+
+.v-navigation-drawer__border {
+  // width: 0 !important;
+}
+
+.v-application--is-ltr .v-list-item__action:first-child,
+.v-application--is-ltr .v-list-item__icon:first-child {
+  margin-right: 20px !important;
+}
+
+.flex-center-between {
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+}

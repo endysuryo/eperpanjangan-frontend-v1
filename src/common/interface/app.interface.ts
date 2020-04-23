@@ -1,4 +1,4 @@
-export interface IAppState {
+export interface AppState {
   isError: boolean;
   message: string;
 }

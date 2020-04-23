@@ -1,9 +1,9 @@
-export interface IAuth {
+export interface Auth {
   username: string;
   password: string;
 }
 
-export interface IAuthState {
+export interface AuthState {
   token: string;
   name: string;
   avatar: string;
