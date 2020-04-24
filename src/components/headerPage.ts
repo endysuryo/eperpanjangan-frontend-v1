@@ -1,11 +1,16 @@
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
+import { UserModule } from '../store/modules/user';
 
 @Component({
   name: 'HeaderPage',
 })
 export default class HeaderPage extends Vue {
   @Prop(String) readonly title: string | undefined;
+
+  get fullname() {
+    return UserModule.name;
+  }
 
   VERSION_APP: string = process.env.VUE_APP_VERSION;
   ENV: string = process.env.NODE_ENV;

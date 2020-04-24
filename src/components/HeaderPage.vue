@@ -7,9 +7,11 @@
       >
     </div>
     <div class=" flex-center-between">
+      <div>{{ fullname }}</div>
+      <v-divider vertical class="mx-5"></v-divider>
       <v-menu offset-y :close-on-content-click="false">
         <template v-slot:activator="{ on }">
-          <v-icon v-on="on" color="black" class="mr-3">mdi-bell-outline</v-icon>
+          <v-icon v-on="on" color="black" class="mr-5">mdi-bell-outline</v-icon>
         </template>
         <v-card height="450" width="400">
           <div class="flex-center-between">
