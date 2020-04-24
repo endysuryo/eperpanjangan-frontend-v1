@@ -1,0 +1,59 @@
+<template>
+  <v-app id="base-app">
+    <v-navigation-drawer
+      :mini-variant="miniVariant"
+      clipped
+      app
+      dark
+      color="primary"
+    >
+      <v-list>
+        <v-list-item two-line :class="miniVariant && 'px-0'" class="my-5">
+          <v-list-item-content class="px-3">
+            <img
+              height="28"
+              src="./../assets/images/renjana-kata-logo-white.svg"
+            />
+          </v-list-item-content>
+        </v-list-item>
+
+        <div>
+          <v-subheader v-if="!miniVariant">Dashboard</v-subheader>
+          <v-list-item
+            v-for="item in itemsAccount"
+            :key="item.text"
+            :to="{ name: item.routeName }"
+          >
+            <v-list-item-action>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>{{ item.text }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-subheader v-if="!miniVariant">Course Management</v-subheader>
+          <v-list-item
+            v-for="item in itemsCourse"
+            :key="item.text"
+            :to="{ name: item.routeName }"
+          >
+            <v-list-item-action>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>{{ item.text }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </div>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-content class="ash">
+      <div class="pa-10">
+        <router-view />
+      </div>
+    </v-content>
+  </v-app>
+</template>
+
+<script lang="ts" src="./baseApp.ts"></script>

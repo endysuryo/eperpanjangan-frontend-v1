@@ -1,7 +1,7 @@
 import { requestAuth } from '@/common/utils/request';
-import { Auth } from '../interface/auth.interface';
+import { IAuth } from '../interface/auth.interface';
 
-export const login = (data: Auth) => {
+export const login = (data: IAuth) => {
   return requestAuth({
     url: 'auth/login',
     method: 'POST',

@@ -1,11 +1,11 @@
+import { IAppState } from '@/common/interface/app.interface';
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { AppState } from '@/common/interface/app.interface';
 
 Vue.use(Vuex);
 
-export interface RootState {
-  app: AppState;
+export interface IRootState {
+  app: IAppState;
 }
 
-export default new Vuex.Store<RootState>({});
+export default new Vuex.Store<IRootState>({});

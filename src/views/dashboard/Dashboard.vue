@@ -1,20 +1,10 @@
 <template>
   <div>
-    <div class="mb-10 flex-center-between">
-      <div class="headline">Dashboard</div>
-      <div class=" flex-center-between">
-        <v-avatar color="orange" size="36" class="mr-4">
-          <v-icon color="white" small>mdi-bell</v-icon>
-        </v-avatar>
-        <v-avatar color="orange" size="36">
-          <v-icon color="white" small>mdi-account</v-icon>
-        </v-avatar>
-      </div>
-    </div>
+    <HeaderPage :title="'Dashboard'" />
     <div class="black--text">Summary Report</div>
     <v-row class="mb-3">
       <v-col cols="12">
-        <v-card elevation="0">
+        <v-card>
           <v-card-text class="pa-8">
             <div class="flex-center-between">
               <div v-for="n in 4" :key="n" class="d-flex">
@@ -22,7 +12,7 @@
                   dark
                   width="50px"
                   height="50px"
-                  color="blue"
+                  color="primary"
                   class="mr-4"
                 >
                   <v-icon color="white">mdi-arrow-up-drop-circle</v-icon>
@@ -41,11 +31,11 @@
     </v-row>
     <div class="flex-center-between">
       <div class="black--text">Top Programs</div>
-      <div class="grey--text body-1">See All</div>
+      <div class="grey--text body-1">See All Programs</div>
     </div>
     <v-row class="mb-3">
-      <v-col v-for="n in 4" :key="n">
-        <v-card max-width="300" elevation="0">
+      <v-col cols="3" v-for="n in 4" :key="n">
+        <v-card>
           <v-img
             class="white--text align-end"
             height="180px"
@@ -55,7 +45,7 @@
           </v-img>
 
           <v-card-subtitle class="pb-2">
-            <v-chip small color="blue">
+            <v-chip small color="primary">
               <span class="white--text">Technology</span>
             </v-chip>
           </v-card-subtitle>
@@ -85,9 +75,9 @@
     <v-row>
       <v-col cols="6" v-for="n in 2" :key="n">
         <div class="black--text mb-3">Recent Comments</div>
-        <v-card elevation="0">
+        <v-card>
           <v-card-text>
-            <v-list three-line>
+            <v-list two-line>
               <template v-for="(item, index) in items">
                 <v-divider :key="index" v-if="index !== 0"></v-divider>
                 <v-list-item :key="item.title">

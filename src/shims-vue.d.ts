@@ -5,3 +5,4 @@ declare module '*.vue' {
 
 declare module 'jsonwebtoken';
 declare module 'js-cookie';
+declare module '@dsb-norge/vue-keycloak-js';

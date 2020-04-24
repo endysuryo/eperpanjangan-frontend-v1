@@ -1,9 +1,5 @@
 * {
-  font-family: "Nunito Sans", sans-serif !important;
-}
-
-.v-navigation-drawer__border {
-  // width: 0 !important;
+  font-family: 'Nunito Sans', sans-serif !important;
 }
 
 .v-application--is-ltr .v-list-item__action:first-child,
@@ -11,8 +7,28 @@
   margin-right: 20px !important;
 }
 
+.theme--dark.v-list-item--active::before,
+.theme--dark.v-list-item--active:hover::before,
+.theme--dark.v-list-item:focus::before {
+  background: #0c3058;
+}
+
+.v-card {
+  box-shadow: none !important;
+}
+
 .flex-center-between {
   justify-content: space-between;
   align-items: center;
   display: flex;
+}
+
+.flex-center-around {
+  justify-content: space-around;
+  align-items: center;
+  display: flex;
+}
+
+.screen-height {
+  height: 100vh;
 }

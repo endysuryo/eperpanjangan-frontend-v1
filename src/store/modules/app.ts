@@ -1,3 +1,4 @@
+import { IAppState } from '@/common/interface/app.interface';
 import store from '@/store';
 import {
   Action,
@@ -6,20 +7,19 @@ import {
   Mutation,
   VuexModule,
 } from 'vuex-module-decorators';
-import { AppState } from '@/common/interface/app.interface';
 
 @Module({ dynamic: true, store, name: 'app' })
-class App extends VuexModule implements AppState {
-  isError = false;
-  message = '';
+class App extends VuexModule implements IAppState {
+  isError: boolean = false;
+  message: string = '';
 
   @Action
-  setError(error: any) {
+  setError(error: any): void {
     this.SET_ERROR(error);
   }
 
   @Mutation
-  private SET_ERROR(error: any) {
+  private SET_ERROR(error: any): void {
     this.isError = true;
     this.message = error;
   }
