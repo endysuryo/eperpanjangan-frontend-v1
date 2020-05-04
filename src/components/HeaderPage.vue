@@ -2,12 +2,17 @@
   <div class="mb-10 flex-center-between">
     <div class="headline font-weight-bold">
       <span>{{ title }}</span>
-      <v-chip small class="ml-3" color="primary"
-        >Beta {{ ENV }}-{{ VERSION_APP }}</v-chip
-      >
+      <v-chip small class="ml-3" color="primary">{{ ENV }}-{{ VERSION_APP }}</v-chip>
     </div>
-    <div class=" flex-center-between">
-      <div>{{ fullname }}</div>
+    <div class="flex-center-between">
+      <router-link :to="{ name: 'account' }">
+        <div class="flex-center black--text">
+          <div>{{ fullname }}</div>
+          <v-avatar size="32" class="ml-3">
+            <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
+          </v-avatar>
+        </div>
+      </router-link>
       <v-divider vertical class="mx-5"></v-divider>
       <v-menu offset-y :close-on-content-click="false">
         <template v-slot:activator="{ on }">
@@ -27,9 +32,7 @@
 
                 <v-list-item-content>
                   <v-list-item-title v-html="item.title"></v-list-item-title>
-                  <v-list-item-subtitle
-                    v-html="item.subtitle"
-                  ></v-list-item-subtitle>
+                  <v-list-item-subtitle v-html="item.subtitle"></v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
             </template>

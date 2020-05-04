@@ -38,6 +38,7 @@ export const routes: any[] = [
     component: Dashboard,
     meta: {
       requiresAuth: true,
+      title: 'Dashboard',
       // roles: Object.values(ROLES),
     },
   },

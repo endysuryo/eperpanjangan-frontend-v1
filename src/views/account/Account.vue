@@ -1,6 +1,6 @@
 <template>
   <div>
-    <HeaderPage :title="'Account'" />
+    <HeaderPage />
     <h1>Account Page</h1>
   </div>
 </template>

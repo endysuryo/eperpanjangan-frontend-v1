@@ -6,6 +6,7 @@
       app
       dark
       color="primary"
+      width="280"
     >
       <v-list>
         <v-list-item two-line :class="miniVariant && 'px-0'" class="my-5">
@@ -17,7 +18,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <div>
+        <div class="px-5">
           <v-subheader v-if="!miniVariant">Dashboard</v-subheader>
           <v-list-item
             v-for="item in itemsAccount"
@@ -49,7 +50,7 @@
     </v-navigation-drawer>
 
     <v-content class="ash">
-      <div class="pa-10">
+      <div class="inner-content">
         <router-view />
       </div>
     </v-content>

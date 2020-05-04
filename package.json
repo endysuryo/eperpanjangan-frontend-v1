@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve --mode local --port 8081",
+    "serve": "vue-cli-service serve --mode local --port 8081 --open",
     "build": "vue-cli-service build --mode local",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
@@ -15,6 +15,7 @@
     "@dsb-norge/vue-keycloak-js": "^1.1.2",
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
+    "hooper": "^0.3.4",
     "js-cookie": "^2.2.1",
     "jsonwebtoken": "^8.5.1",
     "tslint": "^6.1.1",

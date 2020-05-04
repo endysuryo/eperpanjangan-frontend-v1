@@ -6,7 +6,9 @@ import { UserModule } from '../store/modules/user';
   name: 'HeaderPage',
 })
 export default class HeaderPage extends Vue {
-  @Prop(String) readonly title: string | undefined;
+  get title() {
+    return this.$route.meta.title;
+  }
 
   get fullname() {
     return UserModule.name;
