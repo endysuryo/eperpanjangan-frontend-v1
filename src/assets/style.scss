@@ -44,7 +44,8 @@ a:hover {
   background: #0c3058;
 }
 
-.v-card {
+.v-card,
+.v-btn {
   box-shadow: none !important;
 }
 
@@ -56,13 +57,13 @@ a:hover {
 .flex-center-between {
   justify-content: space-between;
   align-items: center;
-  display: flex;
+  display: flex !important;
 }
 
 .flex-center-around {
   justify-content: space-around;
   align-items: center;
-  display: flex;
+  display: flex !important;
 }
 
 .screen-height {

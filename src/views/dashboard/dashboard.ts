@@ -48,29 +48,5 @@ export default class Dashboard extends Vue {
       title: 'Birthday gift',
       subtitle: 'Ill be in your neighborhood doing errands this weekend',
     },
-    {
-      id: 4,
-      avatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
-      title: 'Recipe to try',
-      subtitle: 'Ill be in your neighborhood doing errands this weekend',
-    },
-    {
-      id: 5,
-      avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
-      title: 'Oui oui',
-      subtitle: 'Ill be in your neighborhood doing errands this weekend',
-    },
-    {
-      id: 6,
-      avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
-      title: 'Birthday gift',
-      subtitle: 'Ill be in your neighborhood doing errands this weekend',
-    },
-    {
-      id: 7,
-      avatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
-      title: 'Recipe to try',
-      subtitle: 'Ill be in your neighborhood doing errands this weekend',
-    },
   ];
 }

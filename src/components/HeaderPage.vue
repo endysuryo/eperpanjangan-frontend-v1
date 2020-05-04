@@ -1,8 +1,18 @@
 <template>
   <div class="mb-10 flex-center-between">
-    <div class="headline font-weight-bold">
-      <span>{{ title }}</span>
-      <v-chip small class="ml-3" color="primary">{{ ENV }}-{{ VERSION_APP }}</v-chip>
+    <div class="flex-center">
+      <v-btn
+        fab
+        small
+        class="mr-2"
+        v-if="$route.meta.back"
+        :to="{ name: $route.meta.back }"
+      >
+        <v-icon>mdi-arrow-left</v-icon>
+      </v-btn>
+      <div class="title font-weight-normal">
+        <span>{{ title }}</span>
+      </div>
     </div>
     <div class="flex-center-between">
       <router-link :to="{ name: 'account' }">
@@ -32,7 +42,9 @@
 
                 <v-list-item-content>
                   <v-list-item-title v-html="item.title"></v-list-item-title>
-                  <v-list-item-subtitle v-html="item.subtitle"></v-list-item-subtitle>
+                  <v-list-item-subtitle
+                    v-html="item.subtitle"
+                  ></v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
             </template>

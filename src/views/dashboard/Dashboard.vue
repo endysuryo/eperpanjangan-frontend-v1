@@ -29,11 +29,13 @@
     </v-row>
     <div class="flex-center-between">
       <div class="black--text">Top Programs</div>
-      <div class="grey--text body-1">See All Programs</div>
+      <router-link class="grey--text" :to="{ name: 'program' }"
+        >See All Programs</router-link
+      >
     </div>
     <v-row>
       <v-col cols="12">
-        <hooper ref="hooper" style="height: 390px;" :settings="hooperSettings">
+        <hooper ref="hooper" style="height: 400px;" :settings="hooperSettings">
           <slide class="pr-5" v-for="n in 8" :key="n">
             <v-card :to="{ name: 'program' }">
               <v-img
@@ -41,18 +43,12 @@
                 height="180px"
                 src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
               >
-                <v-card-subtitle class="pb-2">
-                  <v-chip small color="primary">
-                    <span class="white--text">Technology</span>
-                  </v-chip>
-                </v-card-subtitle>
               </v-img>
-
               <v-card-title class="title"
                 >Top 10 Australian beaches</v-card-title
               >
 
-              <v-card-text class="text--primary">
+              <v-card-text class="text--primary pb-0">
                 <v-row align="center" class="mx-0">
                   <v-rating
                     :value="4"
@@ -70,8 +66,11 @@
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod...
                 </div>
+              </v-card-text>
+              <v-divider></v-divider>
+              <v-card-text class="py-2">
                 <div class="flex-center-between">
-                  <div>Total user enroll</div>
+                  <div>Total enroll</div>
                   <div class="font-weight-bold">65</div>
                 </div>
               </v-card-text>

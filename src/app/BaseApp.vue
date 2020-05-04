@@ -21,6 +21,7 @@
         <div class="px-5">
           <v-subheader v-if="!miniVariant">Dashboard</v-subheader>
           <v-list-item
+            class="mb-2"
             v-for="item in itemsAccount"
             :key="item.text"
             :to="{ name: item.routeName }"
