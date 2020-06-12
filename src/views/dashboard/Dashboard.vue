@@ -8,13 +8,7 @@
           <v-card-text class="pa-8">
             <div class="flex-center-between">
               <div v-for="n in 4" :key="n" class="d-flex">
-                <v-avatar
-                  dark
-                  width="50px"
-                  height="50px"
-                  color="primary"
-                  class="mr-4"
-                >
+                <v-avatar dark width="50px" height="50px" color="primary" class="mr-4">
                   <v-icon color="white">mdi-arrow-up-drop-circle</v-icon>
                 </v-avatar>
                 <div>
@@ -29,9 +23,7 @@
     </v-row>
     <div class="flex-center-between">
       <div class="black--text">Top Programs</div>
-      <router-link class="grey--text" :to="{ name: 'program' }"
-        >See All Programs</router-link
-      >
+      <router-link class="grey--text" :to="{ name: 'program' }">See All Programs</router-link>
     </div>
     <v-row>
       <v-col cols="12">
@@ -42,11 +34,8 @@
                 class="white--text align-end"
                 height="180px"
                 src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-              >
-              </v-img>
-              <v-card-title class="title"
-                >Top 10 Australian beaches</v-card-title
-              >
+              ></v-img>
+              <v-card-title class="title">Top 10 Australian beaches</v-card-title>
 
               <v-card-text class="text--primary pb-0">
                 <v-row align="center" class="mx-0">
@@ -95,12 +84,8 @@
                     </v-list-item-avatar>
 
                     <v-list-item-content>
-                      <v-list-item-title
-                        v-html="item.title"
-                      ></v-list-item-title>
-                      <v-list-item-subtitle
-                        v-html="item.subtitle"
-                      ></v-list-item-subtitle>
+                      <v-list-item-title v-html="item.title"></v-list-item-title>
+                      <v-list-item-subtitle v-html="item.subtitle"></v-list-item-subtitle>
                     </v-list-item-content>
                   </v-list-item>
                 </div>

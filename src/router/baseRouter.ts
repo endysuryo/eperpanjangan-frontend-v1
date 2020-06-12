@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Account from '../views/account/Account.vue';
 import Dashboard from '../views/dashboard/Dashboard.vue';
+import Init from '../views/init/Init.vue';
 import DetailProgram from '../views/program/Detail.vue';
 import FormProgram from '../views/program/Form.vue';
 import Program from '../views/program/Program.vue';
@@ -41,11 +42,20 @@ export const routes: any[] = [
   {
     path: '/',
     name: 'home',
-    component: Dashboard,
+    component: Init,
     meta: {
       requiresAuth: true,
-      title: 'Dashboard',
+      title: 'Init',
       // roles: Object.values(ROLES),
+    },
+  },
+  {
+    path: '/init',
+    name: 'init',
+    component: Init,
+    meta: {
+      title: 'Init',
+      requiredAuth: true,
     },
   },
   {

@@ -10,6 +10,7 @@ export default class BaseApp extends Vue {
   drawer: boolean = true;
   miniVariant: boolean = false;
   itemsAccount: any = [
+    { icon: 'mdi-television-guide', text: 'Channel List', routeName: 'init' },
     { icon: 'mdi-home', text: 'Dashboard', routeName: 'dashboard' },
     { icon: 'mdi-account', text: 'Account', routeName: 'account' },
   ];
