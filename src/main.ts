@@ -1,5 +1,6 @@
 import VueKeyCloak from '@dsb-norge/vue-keycloak-js';
 import Vue from 'vue';
+import Vuelidate from 'vuelidate';
 import BaseApp from './app/BaseApp.vue';
 import PublicApp from './app/PublicApp.vue';
 import './assets/style.scss';
@@ -25,7 +26,7 @@ if (window.location.pathname.includes('/author/')) {
   } else if (exp[2]) {
     realm = exp[2];
   }
-
+  Vue.use(Vuelidate);
   Vue.use(VueKeyCloak, {
     config: {
       realm,

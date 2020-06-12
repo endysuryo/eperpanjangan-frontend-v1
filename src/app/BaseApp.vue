@@ -1,61 +1,42 @@
 <template>
   <v-app id="base-app">
-    <v-navigation-drawer
-      :mini-variant="miniVariant"
-      clipped
-      app
-      dark
-      color="primary"
-      width="280"
-    >
-      <v-list>
-        <v-list-item two-line :class="miniVariant && 'px-0'" class="my-5">
-          <v-list-item-content class="px-3">
-            <img
-              height="28"
-              src="./../assets/images/renjana-kata-logo-white.svg"
-            />
-          </v-list-item-content>
-        </v-list-item>
-
-        <div class="px-5">
-          <v-subheader v-if="!miniVariant">Dashboard</v-subheader>
-          <v-list-item
-            class="mb-2"
-            v-for="item in itemsAccount"
-            :key="item.text"
-            :to="{ name: item.routeName }"
-          >
-            <v-list-item-action>
-              <v-icon>{{ item.icon }}</v-icon>
-            </v-list-item-action>
-            <v-list-item-content>
-              <v-list-item-title>{{ item.text }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-          <v-subheader v-if="!miniVariant">Course Management</v-subheader>
-          <v-list-item
-            v-for="item in itemsCourse"
-            :key="item.text"
-            :to="{ name: item.routeName }"
-          >
-            <v-list-item-action>
-              <v-icon>{{ item.icon }}</v-icon>
-            </v-list-item-action>
-            <v-list-item-content>
-              <v-list-item-title>{{ item.text }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
+    <header-page />
+    <v-content>
+      <div class="outter-content">
+        <div class="inner-content">
+          <router-view />
         </div>
-      </v-list>
-    </v-navigation-drawer>
-
-    <v-content class="ash">
-      <div class="inner-content">
-        <router-view />
       </div>
     </v-content>
   </v-app>
 </template>
 
 <script lang="ts" src="./baseApp.ts"></script>
+
+<style lang="scss">
+.outter-content {
+  position: relative;
+}
+.inner-content {
+  width: 90%;
+  margin: 0 auto;
+  padding: 40px 40px;
+}
+/* ----------- Non-Retina Screens ----------- */
+@media screen and (min-device-width: 1200px) and (max-device-width: 1600px) and (-webkit-min-device-pixel-ratio: 1) {
+  .inner-content {
+    width: 80%;
+    margin: 0 auto;
+    padding: 40px 40px;
+  }
+}
+
+/* ----------- Retina Screens ----------- */
+@media screen and (min-device-width: 1200px) and (max-device-width: 1600px) and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi) {
+  .inner-content {
+    width: 80%;
+    margin: 0 auto;
+    padding: 40px 40px;
+  }
+}
+</style>

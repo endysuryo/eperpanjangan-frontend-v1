@@ -1,8 +1,12 @@
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
+import headerPage from '../components/HeaderPage.vue';
 
 @Component({
   name: 'BaseApp',
+  components: {
+    headerPage,
+  },
 })
 export default class BaseApp extends Vue {
   VERSION_APP: string = process.env.VUE_APP_VERSION;

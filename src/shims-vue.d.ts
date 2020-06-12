@@ -7,3 +7,5 @@ declare module 'jsonwebtoken';
 declare module 'js-cookie';
 declare module 'hooper';
 declare module '@dsb-norge/vue-keycloak-js';
+declare module 'vuelidate';
+declare module 'vue-quill-editor';

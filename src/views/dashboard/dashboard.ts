@@ -21,7 +21,7 @@ export default class Dashboard extends Vue {
     wheelControl: false,
   };
   mounted() {
-    console.info(this.$refs.hooper);
+    // console.info(this.$refs.hooper);
   }
   items: any = [
     {
