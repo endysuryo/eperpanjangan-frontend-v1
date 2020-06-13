@@ -1,4 +1,4 @@
-import { IAppState } from '@/common/interface/app.interface';
+import { IAlertState, IAppState } from '@/common/interface/app.interface';
 import store from '@/store';
 import {
   Action,
@@ -8,9 +8,25 @@ import {
   VuexModule,
 } from 'vuex-module-decorators';
 
-@Module({ dynamic: true, store, name: 'app' })
-class App extends VuexModule implements IAppState {
+@Module({ dynamic: true, store, name: 'config' })
+class AppConfig extends VuexModule implements IAppState {
   loadingProcess = false;
+  alertData = {
+    alert: false,
+    type: '',
+    title: '',
+    message: '',
+  };
+
+  @Action
+  toggleAlert(payload: IAlertState) {
+    this.TOGGLE_ALERT(payload);
+  }
+
+  @Mutation
+  TOGGLE_ALERT(payload: IAlertState) {
+    this.alertData = { ...payload };
+  }
 }
 
-export const AppModule = getModule(App);
+export const AppModule = getModule(AppConfig);

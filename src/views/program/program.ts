@@ -1,19 +1,17 @@
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import { IProgramData } from '../../common/interface/program.interface';
-import { initProgramData } from '../../common/utils/initialValue';
+import programCard from '../../components/program/ProgramCard.vue';
 import { ProgramModule } from '../../store/modules/program';
-import FormProgram from './Form.vue';
 
 @Component({
   name: 'Program',
   components: {
-    FormProgram,
+    programCard,
   },
 })
 export default class Program extends Vue {
   dialog: boolean = false;
-  programData: IProgramData = initProgramData;
 
   mounted() {
     this.getProgramList();
@@ -31,12 +29,11 @@ export default class Program extends Vue {
     return ProgramModule.isLoadingFetchProgram;
   }
 
-  getProgramList() {
-    ProgramModule.fetchProgram(this.params);
+  async getProgramList() {
+    await ProgramModule.fetchProgram(this.params);
   }
 
   onDialogClosed(payload: IProgramData) {
     this.dialog = false;
-    console.info('program data', payload);
   }
 }

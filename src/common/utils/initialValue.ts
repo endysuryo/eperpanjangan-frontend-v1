@@ -4,20 +4,21 @@ import {
   IResult,
   ISuccessState,
 } from '../interface/app.interface';
+import { IFileResult } from '../interface/file.interface';
 import { IProgramData } from '../interface/program.interface';
 
 export const initParams: IParams = {
   filters: [],
   joins: [],
   sorts: [],
-  page: 10,
-  per_page: 1,
+  page: 1,
+  per_page: 9,
 };
 
 export const initResult: IResult = {
   count: 0,
   data: [],
-  page: 10,
+  page: 1,
   total: 0,
 };
 
@@ -45,7 +46,20 @@ export const initProgramData: IProgramData = {
   is_recommended: false,
   is_class_dependent_by_order: false,
   is_unit_dependent_by_order: false,
-  max_duration_access: '',
+  max_duration_access: new Date().toISOString().substr(0, 7),
   tags: [],
-  status: '',
+  status: 'DRAFT',
+  preview_image_url: '',
+  preview_video_url: '',
+};
+
+export const initFileData: IFileResult = {
+  destination: '',
+  encoding: '',
+  fieldname: '',
+  filename: '',
+  mimetype: '',
+  originalname: '',
+  path: '',
+  size: 0,
 };

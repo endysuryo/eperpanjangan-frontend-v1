@@ -1,4 +1,3 @@
-import store from '@/store';
 import {
   Action,
   getModule,
@@ -6,21 +5,30 @@ import {
   Mutation,
   VuexModule,
 } from 'vuex-module-decorators';
-import { fetchProgram } from '../../common/api/program';
+import {
+  createProgram,
+  fetchOneProgram,
+  fetchProgram,
+} from '../../common/api/program';
 import {
   IErrorState,
   IParams,
   IResult,
   ISuccessState,
 } from '../../common/interface/app.interface';
-import { IProgramStore } from '../../common/interface/program.interface';
+import {
+  IProgramData,
+  IProgramStore,
+} from '../../common/interface/program.interface';
 import { convertTitle, formatErrorMessage } from '../../common/utils/helper';
 import {
   initErrorState,
   initParams,
+  initProgramData,
   initResult,
   initSuccessState,
 } from '../../common/utils/initialValue';
+import store from '../../store';
 
 @Module({ dynamic: true, store, name: 'program' })
 class Program extends VuexModule implements IProgramStore {
@@ -28,19 +36,22 @@ class Program extends VuexModule implements IProgramStore {
   isLoadingCreateProgram = false;
   isLoadingUpdateProgram = false;
   isLoadingDeleteProgram = false;
-  programs = initResult;
+  programs = { ...initResult };
+  programData = { ...initProgramData };
+
   paramsProgram = initParams;
   isProgramError = false;
-  programErrorState = initErrorState;
+  programErrorState = { ...initErrorState };
   isProgramSuccess = false;
-  programSuccessState = initSuccessState;
+  programSuccessState = { ...initSuccessState };
 
   @Action
   async fetchProgram(params: IParams) {
     try {
-      this.CLEAN_ACTION();
+      this.CLEAN_ACTION_PROGRAM();
       this.SET_LOADING_FETCH_PROGRAM(true);
       const res: any = await fetchProgram(params);
+
       if (res && res.data) {
         this.SET_LOADING_FETCH_PROGRAM(false);
         this.SET_PROGRAMS(res.data);
@@ -51,31 +62,80 @@ class Program extends VuexModule implements IProgramStore {
     } catch (error) {
       this.SET_LOADING_FETCH_PROGRAM(false);
       this.SET_PROGRAMS(initResult);
-      this.SET_INDICATOR_ERROR_PROGRAM(true);
-      this.SET_ERROR_PROGRAM(formatErrorMessage(error));
+      this.SET_ERROR_PROGRAM({ data: formatErrorMessage(error), status: true });
     }
   }
 
   @Mutation
   SET_PROGRAMS(payload: IResult) {
-    let result = initResult;
+    const result: IResult = payload;
     if (payload.data.length > 0) {
-      result = payload.data.map((el: any) => {
+      result.data = payload.data.map((el: any) => {
         return {
           ...el,
-          title_converted: convertTitle(el.title),
+          title_converted: el.title ? convertTitle(el.title) : '',
         };
       });
     }
     this.programs = result;
   }
 
+  @Action
+  async createProgram(payload: IProgramData) {
+    try {
+      this.SET_LOADING_CREATE_PROGRAM(true);
+      this.SET_INDICATOR_SUCCESS_PROGRAM(false);
+      const res: any = await createProgram(payload);
+
+      if (res && res.data) {
+        this.SET_LOADING_CREATE_PROGRAM(false);
+        this.SET_INDICATOR_SUCCESS_PROGRAM(true);
+        this.SET_PROGRAM_DATA(res.data);
+      } else {
+        this.SET_LOADING_CREATE_PROGRAM(false);
+        this.SET_INDICATOR_SUCCESS_PROGRAM(false);
+      }
+    } catch (error) {
+      this.SET_LOADING_CREATE_PROGRAM(false);
+      this.SET_INDICATOR_SUCCESS_PROGRAM(false);
+      this.SET_ERROR_PROGRAM({ data: formatErrorMessage(error), status: true });
+    }
+  }
+
+  @Action
+  async fetchOneProgram(payload: string) {
+    try {
+      this.CLEAN_ACTION_PROGRAM();
+      this.SET_LOADING_FETCH_PROGRAM(true);
+      const res: any = await fetchOneProgram(payload);
+
+      if (res && res.data) {
+        this.SET_LOADING_FETCH_PROGRAM(false);
+        this.SET_PROGRAM_DATA(res.data);
+      } else {
+        this.SET_LOADING_FETCH_PROGRAM(false);
+        this.SET_PROGRAM_DATA(initProgramData);
+      }
+    } catch (error) {
+      this.SET_LOADING_FETCH_PROGRAM(false);
+      this.SET_PROGRAM_DATA(initProgramData);
+      this.SET_ERROR_PROGRAM({ data: formatErrorMessage(error), status: true });
+    }
+  }
+
   @Mutation
-  CLEAN_ACTION() {
+  SET_PROGRAM_DATA(payload: IProgramData) {
+    this.programData = {
+      ...payload,
+    };
+  }
+
+  @Mutation
+  CLEAN_ACTION_PROGRAM() {
     this.isProgramError = false;
     this.isProgramSuccess = false;
-    this.programSuccessState = initSuccessState;
-    this.programErrorState = initErrorState;
+    this.programSuccessState = { ...initSuccessState };
+    this.programErrorState = { ...initErrorState };
   }
 
   @Mutation
@@ -99,13 +159,9 @@ class Program extends VuexModule implements IProgramStore {
   }
 
   @Mutation
-  SET_INDICATOR_ERROR_PROGRAM(payload: boolean) {
-    this.isProgramError = payload;
-  }
-
-  @Mutation
-  SET_ERROR_PROGRAM(payload: IErrorState) {
-    this.programErrorState = payload;
+  SET_ERROR_PROGRAM(payload: any) {
+    this.isProgramError = payload.status;
+    this.programErrorState = payload.data;
   }
 
   @Mutation

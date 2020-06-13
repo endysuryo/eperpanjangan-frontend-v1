@@ -29,6 +29,17 @@ a:hover {
   height: 42px !important;
 }
 
+.flex-column-center {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-start {
+  align-items: flex-start;
+  display: flex;
+}
+
 .flex-center {
   align-items: center;
   display: flex;
@@ -58,16 +69,46 @@ a:hover {
   left: 0;
 }
 
-.title-text {
+.title-card {
   line-height: 1.5rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: black;
+}
+
+.title-text {
+  line-height: 1.85rem;
   font-size: 1.5rem;
   font-weight: bold;
   color: black;
 }
 
+.placeholder-text-subtitle {
+  font-size: 1rem;
+  color: grey;
+}
+
+.placeholder-text {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: grey;
+}
+
 .text-input {
   font-size: 1rem;
   display: inline-block;
+}
+
+.status-text {
+  text-transform: capitalize;
+  font-weight: 700;
+}
+
+.plyr--video {
+  border-radius: 5px;
+  height: 400px;
 }
 
 .inline-block {

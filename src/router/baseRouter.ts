@@ -2,8 +2,11 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Account from '../views/account/Account.vue';
 import Dashboard from '../views/dashboard/Dashboard.vue';
-import DetailProgram from '../views/program/Detail.vue';
-import FormProgram from '../views/program/Form.vue';
+import ProgramCreate from '../views/program/program-create/Create.vue';
+import AssignmentProgram from '../views/program/program-detail/Assignment.vue';
+import ClassSessionProgram from '../views/program/program-detail/ClassSession.vue';
+import DetailProgram from '../views/program/program-detail/Detail.vue';
+import LearnerProgram from '../views/program/program-detail/Learner.vue';
 import Program from '../views/program/Program.vue';
 import Report from '../views/report/Report.vue';
 
@@ -67,14 +70,41 @@ export const routes: any[] = [
   {
     path: '/create-program',
     name: 'create-program',
-    component: FormProgram,
-    meta: new RouteMeta({ title: 'Create New Program', back: 'program' }),
+    component: ProgramCreate,
+    meta: new RouteMeta({ title: 'Create Program' }),
   },
   {
-    path: '/detail-program/:id',
-    name: 'detail-program',
+    path: '/program/:id/detail',
+    name: 'program-detail',
     component: DetailProgram,
     meta: new RouteMeta({ title: 'Detail Program', back: 'program' }),
+  },
+  {
+    path: '/program/:id/learner-management',
+    name: 'program-learner-management',
+    component: LearnerProgram,
+    meta: new RouteMeta({
+      title: 'Learner Management Program',
+      back: 'program',
+    }),
+  },
+  {
+    path: '/program/:id/class-session',
+    name: 'program-class-session',
+    component: ClassSessionProgram,
+    meta: new RouteMeta({
+      title: 'Class Session Program',
+      back: 'program',
+    }),
+  },
+  {
+    path: '/program/:id/assingment',
+    name: 'program-assingment',
+    component: AssignmentProgram,
+    meta: new RouteMeta({
+      title: 'Assignment Program',
+      back: 'program',
+    }),
   },
   /* author-account */
   {

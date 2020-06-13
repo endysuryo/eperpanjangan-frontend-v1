@@ -9,19 +9,13 @@
     ></v-progress-linear>
 
     <!-- title -->
-    <v-row class="mb-5">
-      <v-col cols="12">
-        <div class="title-text font-weight-bold">
-          Program List {{ programs.page }}
-        </div>
-      </v-col>
-    </v-row>
+    <div class="title-text font-weight-bold mb-5">Program List</div>
 
     <!-- filter -->
     <div class="flex-center-between mb-5">
       <div>
         <v-btn
-          @click="dialog = !dialog"
+          :to="{ name: 'create-program' }"
           outlined
           color="ash_darken"
           class="mr-5 outline-bg-white"
@@ -36,27 +30,28 @@
     </div>
 
     <!-- data -->
-    <v-row v-if="programs.data.length > 0" class="flex-wrap">
-      <v-col v-for="(item, index) in programs.data" :key="{ index }" cols="4">
-        <v-card outlined>
-          <div class="d-flex flex-no-wrap">
-            <v-avatar class="ma-2 mr-0" size="100" tile>
-              <v-img :src="item.preview_image_url"></v-img>
-            </v-avatar>
-            <div>
-              <v-card-title
-                class="title-text font-weight-bold mb-2"
-                v-text="convertTitle(item.title)"
-              ></v-card-title>
-              <v-card-subtitle v-text="'Presented by -'"></v-card-subtitle>
-            </div>
-          </div>
-        </v-card>
+    <v-row v-if="programs.count > 0" class="flex-wrap">
+      <v-col cols="8">
+        <program-card
+          class="mb-5"
+          v-for="item in programs.data"
+          :key="item.id"
+          :payload="{
+          title: item.title_converted,
+          image: item.preview_image_url,
+          status: item.status,
+          tags: item.tags,
+          id: item.id,
+        }"
+        />
+      </v-col>
+      <v-col cols="4">
+        <div class="title-text">Tutorial section</div>
       </v-col>
     </v-row>
 
     <!-- empty data -->
-    <v-row v-if="programs.data.length === 0 && !isLoadingFetchProgram">
+    <v-row v-if="programs.count === 0 && !isLoadingFetchProgram">
       <v-col cols="12" class="flex-center-around">
         <div class="text-center">
           <v-icon x-large class="mb-5">mdi-information-outline</v-icon>
@@ -64,12 +59,6 @@
         </div>
       </v-col>
     </v-row>
-
-    <FormProgram
-      v-if="dialog"
-      :dialog="dialog"
-      v-on:closeModal="onDialogClosed($event)"
-    />
   </div>
 </template>
 

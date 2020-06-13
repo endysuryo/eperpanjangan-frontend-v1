@@ -1,5 +1,6 @@
 export interface IAppState {
   loadingProcess: boolean;
+  alertData: IAlertState;
 }
 
 export interface IParams {
@@ -26,5 +27,12 @@ export interface IErrorState {
 export interface ISuccessState {
   statusCode: number;
   statusText: string;
+  message: string;
+}
+
+export interface IAlertState {
+  alert: boolean;
+  type: string | any;
+  title: string;
   message: string;
 }

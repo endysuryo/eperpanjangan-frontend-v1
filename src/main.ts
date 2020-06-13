@@ -1,5 +1,6 @@
 import VueKeyCloak from '@dsb-norge/vue-keycloak-js';
 import Vue from 'vue';
+import VuePlyr from 'vue-plyr';
 import Vuelidate from 'vuelidate';
 import BaseApp from './app/BaseApp.vue';
 import PublicApp from './app/PublicApp.vue';
@@ -16,6 +17,13 @@ import PublicRouter from './router/publicRouter';
 import store from './store';
 import { UserModule } from './store/modules/user';
 
+Vue.use(VuePlyr, {
+  plyr: {
+    fullscreen: { enabled: true },
+  },
+  emit: ['ended'],
+});
+Vue.use(Vuelidate);
 Vue.config.productionTip = false;
 
 if (window.location.pathname.includes('/author/')) {
@@ -26,7 +34,6 @@ if (window.location.pathname.includes('/author/')) {
   } else if (exp[2]) {
     realm = exp[2];
   }
-  Vue.use(Vuelidate);
   Vue.use(VueKeyCloak, {
     config: {
       realm,
@@ -52,7 +59,6 @@ if (window.location.pathname.includes('/author/')) {
       //     break;
       //   }
       // }
-
       if (!isAuth) {
         keycloak.logout();
       } else {

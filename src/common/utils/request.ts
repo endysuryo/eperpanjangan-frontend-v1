@@ -1,5 +1,6 @@
 import { UserModule } from '@/store/modules/user';
 import axios from 'axios';
+import { FileModule } from '../../store/modules/file';
 
 /* auth request api */
 export const requestAuth = axios.create({
@@ -23,6 +24,32 @@ export const requestProgram = axios.create({
 });
 
 requestProgram.interceptors.request.use(
+  (config: any) => {
+    config.headers = UserModule.headers;
+    config.realm = UserModule.realm;
+    return config;
+  },
+  (error) => {
+    Promise.reject(error);
+  },
+);
+
+/* file request api */
+export const requestFile = axios.create({
+  baseURL: process.env.VUE_APP_API_FILE_SERVICE_URL,
+  timeout: 10000,
+  headers: {
+    'Content-Type': 'multipart/form-data',
+  },
+  onUploadProgress: (progressEvent: any) => {
+    const uploadPercentage: any = Math.round(
+      (progressEvent.loaded / progressEvent.total) * 100,
+    );
+    FileModule.updateUploadPrecentage(uploadPercentage);
+  },
+});
+
+requestFile.interceptors.request.use(
   (config: any) => {
     config.headers = UserModule.headers;
     config.realm = UserModule.realm;

@@ -6,6 +6,8 @@ export interface IProgramStore {
   isLoadingUpdateProgram: boolean;
   isLoadingDeleteProgram: boolean;
   programs: IResult;
+  programData: IProgramData;
+
   paramsProgram: IParams;
   isProgramError: boolean;
   programErrorState: IErrorState;
@@ -14,6 +16,7 @@ export interface IProgramStore {
 }
 
 export interface IProgramData {
+  id?: string;
   title: string;
   title_converted?: string;
   description: string | any;
@@ -29,4 +32,11 @@ export interface IProgramData {
   max_duration_access: string;
   tags: string[];
   status: string;
+  preview_image_url: string;
+  preview_video_url: string;
+}
+
+export interface IPropsDataStep {
+  title: string;
+  id: any;
 }
