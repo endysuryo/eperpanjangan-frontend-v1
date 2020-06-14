@@ -2,7 +2,9 @@ import { Hooper, Navigation, Slide } from 'hooper';
 import 'hooper/dist/hooper.css';
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
+import { ICustomer } from '../../common/interface/customer.interface';
 import HeaderPage from '../../components/HeaderPage.vue';
+// import {createCustomer } from '../../store/modules/customer';
 
 @Component({
   name: 'Customer',
@@ -14,6 +16,11 @@ import HeaderPage from '../../components/HeaderPage.vue';
   },
 })
 export default class Customer extends Vue {
+  isLoading = true;
+  name: string = '';
+  address: string = '';
+  phone: string = '';
+  npwp: string = '';
   hooperSettings: any = {
     itemsToShow: 4.14,
     centerMode: false,
@@ -23,10 +30,6 @@ export default class Customer extends Vue {
   mounted() {
     console.info(this.$refs.hooper);
   }
-  name: string = '';
-  address: string = '';
-  phone: string = '';
-  npwp: string = '';
 
   async createCustomer() {
     const dataCustomer = {
@@ -35,5 +38,7 @@ export default class Customer extends Vue {
       phone: this.phone,
       npwp: this.npwp,
     };
+
+    // this.createCustomer(dataCustomer: ICustomer);
   }
 }

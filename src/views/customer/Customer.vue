@@ -2,6 +2,13 @@
   <div>
     <HeaderPage />
     <v-card ref="form">
+      <v-progress-linear
+        class="loading-indicator"
+        v-if="isLoading"
+        color="red lighten-1"
+        indeterminate
+        height="5"
+      ></v-progress-linear>
       <v-card-text>
         <div class="flex-center-between">
           <div class="black--text mb-5">Input Data Customer</div>
@@ -53,7 +60,7 @@
             <span>Refresh form</span>
           </v-tooltip>
         </v-slide-x-reverse-transition>
-        <v-btn color="teal darken-1" @click="submit" dark>Submit</v-btn>
+        <v-btn color="red lighten-1" @click="submit" dark>Submit</v-btn>
       </v-card-actions>
     </v-card>
   </div>
