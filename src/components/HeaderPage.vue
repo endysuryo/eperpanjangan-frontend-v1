@@ -1,13 +1,7 @@
 <template>
   <div class="mb-10 flex-center-between">
     <div class="flex-center">
-      <v-btn
-        fab
-        small
-        class="mr-2"
-        v-if="$route.meta.back"
-        :to="{ name: $route.meta.back }"
-      >
+      <v-btn fab small class="mr-2" v-if="$route.meta.back" :to="{ name: $route.meta.back }">
         <v-icon>mdi-arrow-left</v-icon>
       </v-btn>
       <div class="title font-weight-normal">
@@ -17,7 +11,7 @@
     <div class="flex-center-between">
       <router-link :to="{ name: 'account' }">
         <div class="flex-center black--text">
-          <div>{{ fullname }}</div>
+          <div>Admin</div>
           <v-avatar size="32" class="ml-3">
             <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
           </v-avatar>
@@ -42,9 +36,7 @@
 
                 <v-list-item-content>
                   <v-list-item-title v-html="item.title"></v-list-item-title>
-                  <v-list-item-subtitle
-                    v-html="item.subtitle"
-                  ></v-list-item-subtitle>
+                  <v-list-item-subtitle v-html="item.subtitle"></v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
             </template>
@@ -64,7 +56,8 @@
               <v-list-item-title>Account</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item @click="$keycloak.logoutFn">
+          <!-- <v-list-item @click="$keycloak.logoutFn"> -->
+          <v-list-item>
             <v-list-item-action>
               <v-icon>mdi-logout</v-icon>
             </v-list-item-action>

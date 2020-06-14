@@ -5,21 +5,18 @@
       clipped
       app
       dark
-      color="primary"
+      color="red lighten-1"
       width="280"
     >
       <v-list>
         <v-list-item two-line :class="miniVariant && 'px-0'" class="my-5">
           <v-list-item-content class="px-3">
-            <img
-              height="28"
-              src="./../assets/images/renjana-kata-logo-white.svg"
-            />
+            <img src="./../assets/images/bapenda-logo.png" />
           </v-list-item-content>
         </v-list-item>
 
         <div class="px-5">
-          <v-subheader v-if="!miniVariant">Dashboard</v-subheader>
+          <!-- <v-subheader v-if="!miniVariant">Dashboard</v-subheader> -->
           <v-list-item
             class="mb-2"
             v-for="item in itemsAccount"
@@ -33,12 +30,8 @@
               <v-list-item-title>{{ item.text }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-subheader v-if="!miniVariant">Course Management</v-subheader>
-          <v-list-item
-            v-for="item in itemsCourse"
-            :key="item.text"
-            :to="{ name: item.routeName }"
-          >
+          <v-subheader v-if="!miniVariant">Master Data</v-subheader>
+          <v-list-item v-for="item in itemsCourse" :key="item.text" :to="{ name: item.routeName }">
             <v-list-item-action>
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-item-action>

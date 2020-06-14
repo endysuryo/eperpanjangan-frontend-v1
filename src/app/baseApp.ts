@@ -10,12 +10,14 @@ export default class BaseApp extends Vue {
   drawer: boolean = true;
   miniVariant: boolean = false;
   itemsAccount: any = [
-    { icon: 'mdi-television-guide', text: 'Channel List', routeName: 'init' },
     { icon: 'mdi-home', text: 'Dashboard', routeName: 'dashboard' },
-    { icon: 'mdi-account', text: 'Account', routeName: 'account' },
+    { icon: 'mdi-account', text: 'Reklame', routeName: 'dashboard' },
+    // { icon: 'mdi-account', text: 'Kmeans', routeName: 'dashboard' },
   ];
   itemsCourse: any = [
-    { icon: 'mdi-book', text: 'Program', routeName: 'program' },
+    { icon: 'mdi-account', text: 'Customer', routeName: 'customer' },
+    { icon: 'mdi-image-area', text: 'Billboard', routeName: 'program' },
+    { icon: 'mdi-map', text: 'Data Kecamatan', routeName: 'program' },
   ];
 
   mounted(): any {
