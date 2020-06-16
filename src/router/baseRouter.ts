@@ -3,10 +3,6 @@ import Router from 'vue-router';
 import Account from '../views/account/Account.vue';
 import Customer from '../views/customer/Customer.vue';
 import Dashboard from '../views/dashboard/Dashboard.vue';
-import DetailProgram from '../views/program/Detail.vue';
-import FormProgram from '../views/program/Form.vue';
-import Program from '../views/program/Program.vue';
-import Report from '../views/report/Report.vue';
 
 Vue.use(Router);
 
@@ -67,38 +63,12 @@ export const routes: any[] = [
       requiredAuth: true,
     },
   },
-  /* author-program */
-  {
-    path: '/program',
-    name: 'program',
-    component: Program,
-    meta: new RouteMeta({ title: 'Program Collection' }),
-  },
-  {
-    path: '/create-program',
-    name: 'create-program',
-    component: FormProgram,
-    meta: new RouteMeta({ title: 'Create New Program', back: 'program' }),
-  },
-  {
-    path: '/detail-program/:id',
-    name: 'detail-program',
-    component: DetailProgram,
-    meta: new RouteMeta({ title: 'Detail Program', back: 'program' }),
-  },
   /* author-account */
   {
     path: '/account',
     name: 'account',
     component: Account,
     meta: new RouteMeta({ title: 'Author Account' }),
-  },
-  /* author-report */
-  {
-    path: '/report',
-    name: 'report',
-    component: Report,
-    meta: new RouteMeta({ title: 'Report' }),
   },
 ];
 

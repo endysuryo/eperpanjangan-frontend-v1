@@ -1,4 +1,12 @@
 import {
+  IErrorState,
+  IParams,
+  IResult,
+  ISuccessState,
+} from '@/common/interface/app.interface';
+import { generateQueryString } from '@/common/utils/generateQuery';
+import { formatErrorMessage } from '@/common/utils/helper';
+import {
   Action,
   getModule,
   Module,
@@ -7,129 +15,169 @@ import {
 } from 'vuex-module-decorators';
 import store from '../';
 import {
-  createCustomer,
-  deleteCustomer,
-  getCustomer,
-  getCustomers,
-  updateCustomer,
+  createOneCustomer,
+  deleteOneCustomer,
+  fetchCustomer,
+  updateOneCustomer,
 } from '../../common/api/customer';
 import {
-  ICustomer,
-  ICustomerState,
-  InitCustomer,
+  ICustomerData,
+  ICustomerStore,
 } from '../../common/interface/customer.interface';
+import {
+  initErrorState,
+  initParams,
+  initResult,
+  initSuccessState,
+} from '../../common/utils/initialValue';
 
 @Module({ dynamic: true, store, name: 'CustomerModule' })
-class Customer extends VuexModule implements ICustomerState {
-  customers: any = [{ data: [] }];
-  customer: any = InitCustomer;
-  loadingCustomers: boolean = false;
-  loadingActionCustomer: boolean = false;
+class Customer extends VuexModule implements ICustomerStore {
+  isLoadingFetchCustomer = false;
+  isLoadingCreateCustomer = false;
+  isLoadingUpdateCustomer = false;
+  isLoadingDeleteCustomer = false;
+  customers = initResult;
+  paramsCustomer = { ...initParams };
+  isCustomerError = false;
+  customerErrorState = initErrorState;
+  isCustomerSuccess = false;
+  customerSuccessState = initSuccessState;
 
-  @Action async fetchAllCustomers(params?: any) {
-    this.SET_LOADING_CUSTOMER(true);
-    const res: any = await getCustomers(params);
-    this.SET_LOADING_CUSTOMER(false);
-    this.SET_ALL_CUSTOMER(res.data);
-  }
-
-  @Action getOneCustomerFromList(customer_id: string) {
-    this.GET_ONE_CUSTOMER_FROM_LIST(customer_id);
-  }
-
-  @Action async createCustomer(data: ICustomer) {
+  @Action
+  async fetchCustomer(params: IParams) {
     try {
-      this.SET_LOADING_ACTION_CUSTOMER(true);
-      const res: any = await createCustomer(data);
-      this.SET_LOADING_ACTION_CUSTOMER(false);
-      this.SET_INIT_CUSTOMER();
-      return res;
-    } catch (error) {
-      if (error) {
-        this.SET_LOADING_ACTION_CUSTOMER(false);
+      this.CLEAN_ACTION();
+      this.SET_LOADING_FETCH_CUSTOMER(true);
+      const queryString = await generateQueryString(params);
+      const res: any = await fetchCustomer(queryString);
+
+      if (res && res.data) {
+        this.SET_LOADING_FETCH_CUSTOMER(false);
+        console.info('customer res.data', res.data);
+
+        this.SET_CUSTOMERS(res.data);
+      } else {
+        this.SET_LOADING_FETCH_CUSTOMER(false);
+        this.SET_CUSTOMERS(initResult);
       }
+    } catch (error) {
+      this.SET_LOADING_FETCH_CUSTOMER(false);
+      this.SET_CUSTOMERS(initResult);
+      this.SET_INDICATOR_ERROR_CUSTOMER(true);
+      this.SET_ERROR_CUSTOMER(formatErrorMessage(error));
     }
   }
 
-  @Action async updateCustomer(data: ICustomer) {
+  @Action
+  async createOneCustomer(data: ICustomerData) {
     try {
-      this.SET_LOADING_ACTION_CUSTOMER(true);
-      const res: any = await updateCustomer(data);
-      this.SET_LOADING_ACTION_CUSTOMER(false);
-      this.SET_CUSTOMER(res);
-    } catch (error) {
-      if (error) {
-        this.SET_LOADING_ACTION_CUSTOMER(false);
+      this.CLEAN_ACTION();
+      this.SET_LOADING_CREATE_CUSTOMER(true);
+      const res: any = await createOneCustomer(data);
+      if (res && res.data) {
+        this.SET_LOADING_CREATE_CUSTOMER(false);
+        this.fetchCustomer(initParams);
+      } else {
+        this.SET_LOADING_CREATE_CUSTOMER(false);
       }
+    } catch (error) {
+      this.SET_LOADING_CREATE_CUSTOMER(false);
+      this.SET_INDICATOR_ERROR_CUSTOMER(true);
+      this.SET_ERROR_CUSTOMER(formatErrorMessage(error));
     }
   }
 
-  @Action async deleteCustomer(data: any) {
-    this.SET_LOADING_ACTION_CUSTOMER(true);
-    const res: any = await deleteCustomer(data.id);
-    this.SET_LOADING_ACTION_CUSTOMER(false);
-    this.SET_CUSTOMER(res);
+  @Action
+  async updateOneCustomer(data: ICustomerData) {
+    try {
+      console.info('action data', data);
+      this.CLEAN_ACTION();
+      this.SET_LOADING_UPDATE_CUSTOMER(true);
+      const res: any = await updateOneCustomer((data as any).id, data);
+      if (res) {
+        this.SET_LOADING_UPDATE_CUSTOMER(false);
+        this.fetchCustomer(initParams);
+      } else {
+        this.SET_LOADING_UPDATE_CUSTOMER(false);
+      }
+    } catch (error) {
+      this.SET_LOADING_UPDATE_CUSTOMER(false);
+      this.SET_INDICATOR_ERROR_CUSTOMER(true);
+      this.SET_ERROR_CUSTOMER(formatErrorMessage(error));
+    }
   }
 
-  @Action setInitCustomer() {
-    this.SET_INIT_CUSTOMER();
-  }
-
-  @Mutation
-  private SET_ALL_CUSTOMER(res: any) {
-    if (res.data) {
-      const customer: any = res.data.map((el: any) => {
-        el = {
-          ...el,
-        };
-        return el;
-      });
-
-      this.customers = {
-        ...res,
-        data: customer,
-        per_page: Number(res.per_page),
-      };
-    } else if (Array.isArray(res)) {
-      const customer: any = res.map((el: any) => {
-        el = {
-          ...el,
-          // created_at: formatDate(el.created_at, 'date-medium'),
-        };
-        return el;
-      });
-      this.customers = {
-        ...res,
-        data: customer,
-      };
+  @Action
+  async deleteOneCustomer(id: string) {
+    try {
+      this.CLEAN_ACTION();
+      this.SET_LOADING_DELETE_CUSTOMER(true);
+      const res: any = await deleteOneCustomer(id);
+      if (res) {
+        this.SET_LOADING_DELETE_CUSTOMER(false);
+        this.fetchCustomer(initParams);
+      } else {
+        this.SET_LOADING_DELETE_CUSTOMER(false);
+      }
+    } catch (error) {
+      this.SET_LOADING_DELETE_CUSTOMER(false);
+      this.SET_INDICATOR_ERROR_CUSTOMER(true);
+      this.SET_ERROR_CUSTOMER(formatErrorMessage(error));
     }
   }
 
   @Mutation
-  private SET_CUSTOMER(data: any) {
-    this.customer = data;
+  SET_CUSTOMERS(payload: IResult) {
+    this.customers = payload;
   }
 
   @Mutation
-  private SET_INIT_CUSTOMER() {
-    this.customer = {
-      ...JSON.parse(JSON.stringify(InitCustomer)),
-    };
+  CLEAN_ACTION() {
+    this.isCustomerError = false;
+    this.isCustomerSuccess = false;
+    this.customerSuccessState = initSuccessState;
+    this.customerErrorState = initErrorState;
   }
 
   @Mutation
-  private GET_ONE_CUSTOMER_FROM_LIST(id: string) {
-    this.customer = this.customers.data.find((el: any) => el.id === id);
+  SET_LOADING_FETCH_CUSTOMER(payload: boolean) {
+    this.isLoadingFetchCustomer = payload;
   }
 
   @Mutation
-  private SET_LOADING_CUSTOMER(type: boolean) {
-    this.loadingCustomers = type;
+  SET_LOADING_CREATE_CUSTOMER(payload: boolean) {
+    this.isLoadingCreateCustomer = payload;
   }
 
   @Mutation
-  private SET_LOADING_ACTION_CUSTOMER(type: boolean) {
-    this.loadingActionCustomer = type;
+  SET_LOADING_UPDATE_CUSTOMER(payload: boolean) {
+    this.isLoadingUpdateCustomer = payload;
+  }
+
+  @Mutation
+  SET_LOADING_DELETE_CUSTOMER(payload: boolean) {
+    this.isLoadingDeleteCustomer = payload;
+  }
+
+  @Mutation
+  SET_INDICATOR_ERROR_CUSTOMER(payload: boolean) {
+    this.isCustomerError = payload;
+  }
+
+  @Mutation
+  SET_ERROR_CUSTOMER(payload: IErrorState) {
+    this.customerErrorState = payload;
+  }
+
+  @Mutation
+  SET_INDICATOR_SUCCESS_CUSTOMER(payload: boolean) {
+    this.isCustomerSuccess = payload;
+  }
+
+  @Mutation
+  SET_SUCCESS_CUSTOMER(payload: ISuccessState) {
+    this.customerSuccessState = payload;
   }
 }
 

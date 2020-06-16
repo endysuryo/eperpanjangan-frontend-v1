@@ -16,8 +16,8 @@ export default class BaseApp extends Vue {
   ];
   itemsCourse: any = [
     { icon: 'mdi-account', text: 'Customer', routeName: 'customer' },
-    { icon: 'mdi-image-area', text: 'Billboard', routeName: 'program' },
-    { icon: 'mdi-map', text: 'Data Kecamatan', routeName: 'program' },
+    { icon: 'mdi-image-area', text: 'Billboard', routeName: 'billboard' },
+    // { icon: 'mdi-map', text: 'Data Kecamatan', routeName: 'sub-district' },
   ];
 
   mounted(): any {
