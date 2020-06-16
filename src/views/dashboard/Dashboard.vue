@@ -11,7 +11,7 @@
           <v-card-text class="pa-8">
             <div class="flex-center-between">
               <div v-for="n in 4" :key="n" class="d-flex">
-                <v-avatar dark width="50px" height="50px" color="primary" class="mr-4">
+                <v-avatar dark width="50px" height="50px" color="red lighten-1" class="mr-4">
                   <v-icon color="white">mdi-arrow-up-drop-circle</v-icon>
                 </v-avatar>
                 <div>

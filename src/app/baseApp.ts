@@ -11,12 +11,11 @@ export default class BaseApp extends Vue {
   miniVariant: boolean = false;
   itemsAccount: any = [
     { icon: 'mdi-home', text: 'Dashboard', routeName: 'dashboard' },
-    { icon: 'mdi-account', text: 'Reklame', routeName: 'dashboard' },
-    // { icon: 'mdi-account', text: 'Kmeans', routeName: 'dashboard' },
+    { icon: 'mdi-account', text: 'Kmeans', routeName: 'dashboard' },
   ];
   itemsCourse: any = [
     { icon: 'mdi-account', text: 'Customer', routeName: 'customer' },
-    { icon: 'mdi-image-area', text: 'Billboard', routeName: 'billboard' },
+    // { icon: 'mdi-image-area', text: 'Billboard', routeName: 'billboard' },
     // { icon: 'mdi-map', text: 'Data Kecamatan', routeName: 'sub-district' },
   ];
 

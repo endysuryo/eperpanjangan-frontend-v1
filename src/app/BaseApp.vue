@@ -7,6 +7,7 @@
       dark
       color="red lighten-1"
       width="280"
+      v-model="drawer"
     >
       <v-list>
         <v-list-item two-line :class="miniVariant && 'px-0'" class="my-5">
