@@ -1,42 +1,40 @@
 <template>
-  <v-layout flex align-center justify-center>
-    <v-card>
+  <div>
+    <v-snackbar v-model="snackbar" color="alert" top>
+      Username atau password salah
+      <template v-slot:action="{ attrs }">
+        <v-btn color="blue" text v-bind="attrs" @click="snackbar = false">Close</v-btn>
+      </template>
+    </v-snackbar>
+    <v-card class="mx-auto" max-width="400">
       <v-img
-        class="white--text align-end"
-        height="200px"
+        class="white--text align-end justify-center"
+        height="200"
         src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
       >
-        <v-card-title>Top 10 Australian beaches</v-card-title>
+        <v-card-title>Potensi - Bapenda Kota Semarang</v-card-title>
       </v-img>
 
-      <v-card-subtitle class="pb-0">Number 10</v-card-subtitle>
+      <!-- <v-card-subtitle class="pb-0">Login</v-card-subtitle> -->
 
       <v-card-text class="text--primary">
-        <div>Whitehaven Beach</div>
-
-        <div>Whitsunday Island, Whitsunday Islands</div>
+        <v-text-field v-model="username" label="Username" required></v-text-field>
+        <v-text-field
+          v-model="password"
+          :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+          :type="show ? 'text' : 'password'"
+          name="input-10-1"
+          label="Password"
+          @click:append="show = !show"
+        ></v-text-field>
       </v-card-text>
 
-      <form>
-        <v-text-field
-          v-model="name"
-          :error-messages="nameErrors"
-          :counter="10"
-          label="Name"
-          required
-        ></v-text-field>
-        <v-text-field v-model="email" :error-messages="emailErrors" label="E-mail" required></v-text-field>
-
-        <v-btn class="mr-4" @click="submit">submit</v-btn>
-        <v-btn @click="clear">clear</v-btn>
-      </form>
       <v-card-actions>
-        <v-btn color="orange" text>Share</v-btn>
-
-        <v-btn color="orange" text>Explore</v-btn>
+        <v-spacer></v-spacer>
+        <v-btn color="red lighten-1" block dark @click="login">Login</v-btn>
       </v-card-actions>
     </v-card>
-  </v-layout>
+  </div>
 </template>
 
 <script lang="ts" src="./login.ts"></script>

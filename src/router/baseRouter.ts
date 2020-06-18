@@ -50,6 +50,14 @@ export const routes: any[] = [
     },
   },
   {
+    path: '/login',
+    name: 'login',
+    component: Login,
+    meta: {
+      title: 'Login',
+    },
+  },
+  {
     path: '/dashboard',
     name: 'dashboard',
     component: Dashboard,

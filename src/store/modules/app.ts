@@ -11,7 +11,7 @@ import {
 @Module({ dynamic: true, store, name: 'app' })
 class App extends VuexModule implements IAppState {
   loadingProcess = false;
-  drawerAppStatus = true;
+  drawerAppStatus = false;
 
   @Action
   async toggleDrawerApp(status: boolean) {

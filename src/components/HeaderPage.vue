@@ -20,7 +20,7 @@
           <v-icon v-on="on" color="black">mdi-account-outline</v-icon>
         </template>
         <v-list width="250">
-          <v-list-item :to="{ name: 'program' }">
+          <v-list-item :to="{ name: 'account' }">
             <v-list-item-action>
               <v-icon>mdi-account</v-icon>
             </v-list-item-action>
@@ -29,7 +29,7 @@
             </v-list-item-content>
           </v-list-item>
           <!-- <v-list-item @click="$keycloak.logoutFn"> -->
-          <v-list-item>
+          <v-list-item :to="{ name: 'login' }">
             <v-list-item-action>
               <v-icon>mdi-logout</v-icon>
             </v-list-item-action>

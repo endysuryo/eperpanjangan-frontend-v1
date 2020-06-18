@@ -7,7 +7,7 @@ import { AppModule } from '../store/modules/app';
   name: 'HeaderPage',
 })
 export default class HeaderPage extends Vue {
-  drawer: boolean = true;
+  drawer: boolean = false;
 
   get title() {
     return this.$route.meta.title;

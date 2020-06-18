@@ -1,5 +1,6 @@
 export interface IAppState {
   loadingProcess: boolean;
+  drawerAppStatus: boolean;
 }
 
 export interface IParams {
