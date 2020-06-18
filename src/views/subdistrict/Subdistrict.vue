@@ -21,7 +21,7 @@
             ></v-text-field>
           </v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-btn color="red lighten-1" dark class="mb-2" @click="showFormCreate">Create Customer</v-btn>
+          <v-btn color="primary" dark class="mb-2" @click="showFormCreate">Create Customer</v-btn>
           <v-dialog v-model="dialog" max-width="500px">
             <v-card>
               <v-card-title>

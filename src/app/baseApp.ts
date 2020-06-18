@@ -17,12 +17,12 @@ export default class BaseApp extends Vue {
   miniVariant: boolean = false;
   itemsAccount: any = [
     { icon: 'mdi-home', text: 'Dashboard', routeName: 'dashboard' },
-    { icon: 'mdi-chart-line', text: 'Kmeans', routeName: 'kmeans' },
+    // { icon: 'mdi-chart-line', text: 'Kmeans', routeName: 'kmeans' },
   ];
   itemsCourse: any = [
-    { icon: 'mdi-account', text: 'Customer', routeName: 'customer' },
-    { icon: 'mdi-image-area', text: 'Billboard', routeName: 'billboard' },
-    { icon: 'mdi-map', text: 'Data Kecamatan', routeName: 'subdistrict' },
+    { icon: 'mdi-file-document', text: 'Pengajuan', routeName: 'customer' },
+    { icon: 'mdi-file-document', text: 'Laporan', routeName: 'billboard' },
+    // { icon: 'mdi-map', text: 'Data Kecamatan', routeName: 'subdistrict' },
   ];
 
   mounted(): any {

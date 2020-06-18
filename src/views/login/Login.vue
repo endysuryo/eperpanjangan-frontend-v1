@@ -7,13 +7,13 @@
       </template>
     </v-snackbar>
     <v-card class="mx-auto" max-width="400">
-      <v-img
+      <!-- <v-img
         class="white--text align-end justify-center"
         height="200"
         src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-      >
-        <v-card-title>Potensi - Bapenda Kota Semarang</v-card-title>
-      </v-img>
+      >-->
+      <v-card-title class="justify-center">E-Perpanjangan</v-card-title>
+      <!-- </v-img> -->
 
       <!-- <v-card-subtitle class="pb-0">Login</v-card-subtitle> -->
 
@@ -31,7 +31,7 @@
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="red lighten-1" block dark @click="login">Login</v-btn>
+        <v-btn color="primary" block dark @click="login">Login</v-btn>
       </v-card-actions>
     </v-card>
   </div>

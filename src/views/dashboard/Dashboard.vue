@@ -2,25 +2,28 @@
   <div>
     <HeaderPage />
     <div class="flex-center-between">
-      <div class="black--text">Laporan Data Reklame</div>
+      <div class="black--text">Laporan Data Perpanjangan</div>
       <!-- <router-link class="grey--text" :to="{ name: 'program' }">See All Programs</router-link> -->
     </div>
     <v-row class="mb-3">
       <v-col cols="12">
-        <v-card>
-          <v-card-text class="pa-8">
-            <div class="flex-center-between">
-              <div v-for="n in 4" :key="n" class="d-flex">
-                <v-avatar dark width="50px" height="50px" color="red lighten-1" class="mr-4">
-                  <v-icon color="white">mdi-arrow-up-drop-circle</v-icon>
-                </v-avatar>
-                <div>
-                  <div class="body-2">Total Enrollment</div>
-                  <div class="headline black--text">120 Orang</div>
-                </div>
-              </div>
-            </div>
-          </v-card-text>
+        <v-card color="primary" dark>
+          <v-card-title class="headline">
+            <h1>120</h1>
+          </v-card-title>
+          <v-card-subtitle class="mt-1">
+            <h3>Data Perpanjangan Selesai Diproses</h3>
+          </v-card-subtitle>
+        </v-card>
+      </v-col>
+      <v-col cols="12">
+        <v-card color="primary" dark>
+          <v-card-title class="headline">
+            <h1>32</h1>
+          </v-card-title>
+          <v-card-subtitle class="mt-1">
+            <h3>Data Perpanjangan Belum Diproses</h3>
+          </v-card-subtitle>
         </v-card>
       </v-col>
     </v-row>
