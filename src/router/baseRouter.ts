@@ -1,8 +1,12 @@
+import Login from '@/views/login/Login.vue';
 import Vue from 'vue';
 import Router from 'vue-router';
 import Account from '../views/account/Account.vue';
+import Billboard from '../views/billboard/Billboard.vue';
 import Customer from '../views/customer/Customer.vue';
 import Dashboard from '../views/dashboard/Dashboard.vue';
+import Kmeans from '../views/kmeans/Kmeans.vue';
+import Subdistrict from '../views/subdistrict/Subdistrict.vue';
 
 Vue.use(Router);
 
@@ -38,11 +42,29 @@ export const routes: any[] = [
   {
     path: '/',
     name: 'home',
-    component: Dashboard,
+    component: Login,
     meta: {
       requiresAuth: true,
-      title: 'Dashboard',
+      title: 'Login',
       // roles: Object.values(ROLES),
+    },
+  },
+  {
+    path: '/dashboard',
+    name: 'dashboard',
+    component: Dashboard,
+    meta: {
+      title: 'Dashboard',
+      requiredAuth: true,
+    },
+  },
+  {
+    path: '/kmeans',
+    name: 'kmeans',
+    component: Kmeans,
+    meta: {
+      title: 'Kmeans',
+      requiredAuth: true,
     },
   },
   {
@@ -55,11 +77,29 @@ export const routes: any[] = [
     },
   },
   {
-    path: '/dashboard',
-    name: 'dashboard',
-    component: Dashboard,
+    path: '/billboard',
+    name: 'billboard',
+    component: Billboard,
     meta: {
-      title: 'Dashboard',
+      title: 'Billboard',
+      requiredAuth: true,
+    },
+  },
+  {
+    path: '/customer',
+    name: 'customer',
+    component: Customer,
+    meta: {
+      title: 'Customer',
+      requiredAuth: true,
+    },
+  },
+  {
+    path: '/subdistrict',
+    name: 'subdistrict',
+    component: Subdistrict,
+    meta: {
+      title: 'Subdistrict',
       requiredAuth: true,
     },
   },

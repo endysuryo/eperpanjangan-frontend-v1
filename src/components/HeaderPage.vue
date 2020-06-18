@@ -1,7 +1,12 @@
 <template>
   <div class="mb-10 flex-center-between">
     <div class="flex-center">
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="mr-3"></v-app-bar-nav-icon>
+      <div v-if="drawer === false">
+        <v-app-bar-nav-icon @click="changeDrawer(true)" class="mr-3"></v-app-bar-nav-icon>
+      </div>
+      <div v-else-if="drawer === true">
+        <v-app-bar-nav-icon @click="changeDrawer(false)" class="mr-3"></v-app-bar-nav-icon>
+      </div>
       <v-btn fab small class="mr-2" v-if="$route.meta.back" :to="{ name: $route.meta.back }">
         <v-icon>mdi-arrow-left</v-icon>
       </v-btn>

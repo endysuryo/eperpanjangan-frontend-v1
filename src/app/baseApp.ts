@@ -1,3 +1,4 @@
+import { AppModule } from '@/store/modules/app';
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 
@@ -7,16 +8,21 @@ import { Component } from 'vue-property-decorator';
 export default class BaseApp extends Vue {
   VERSION_APP: string = process.env.VUE_APP_VERSION;
   ENV: string = process.env.NODE_ENV;
-  drawer: boolean = true;
+  // drawer: boolean = true;
+
+  get drawerAppStatus() {
+    return AppModule.drawerAppStatus;
+  }
+
   miniVariant: boolean = false;
   itemsAccount: any = [
     { icon: 'mdi-home', text: 'Dashboard', routeName: 'dashboard' },
-    { icon: 'mdi-account', text: 'Kmeans', routeName: 'dashboard' },
+    { icon: 'mdi-chart-line', text: 'Kmeans', routeName: 'kmeans' },
   ];
   itemsCourse: any = [
     { icon: 'mdi-account', text: 'Customer', routeName: 'customer' },
-    // { icon: 'mdi-image-area', text: 'Billboard', routeName: 'billboard' },
-    // { icon: 'mdi-map', text: 'Data Kecamatan', routeName: 'sub-district' },
+    { icon: 'mdi-image-area', text: 'Billboard', routeName: 'billboard' },
+    { icon: 'mdi-map', text: 'Data Kecamatan', routeName: 'subdistrict' },
   ];
 
   mounted(): any {
