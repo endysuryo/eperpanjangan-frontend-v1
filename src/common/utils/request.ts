@@ -4,12 +4,12 @@ console.info(
   'bapenda service: ',
   process.env.VUE_APP_API_BASE_URL_DISHUB_SERVICE,
 );
-export const requestCustomer = axios.create({
+export const requestPerpanjangan = axios.create({
   baseURL: process.env.VUE_APP_API_BASE_URL_DISHUB_SERVICE,
   timeout: 10000,
 });
 
-requestCustomer.interceptors.request.use(
+requestPerpanjangan.interceptors.request.use(
   (config: any) => {
     return config;
   },

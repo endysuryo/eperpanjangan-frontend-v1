@@ -4,7 +4,7 @@ import {
   IResult,
   ISuccessState,
 } from '../interface/app.interface';
-import { ICustomerData } from '../interface/customer.interface';
+import { IPerpanjanganData } from '../interface/perpanjangan.interface';
 
 export const initParams: IParams = {
   filters: [],
@@ -33,7 +33,7 @@ export const initSuccessState: ISuccessState = {
   message: '',
 };
 
-export const initCustomerData: ICustomerData = {
+export const initPerpanjanganData: IPerpanjanganData = {
   name: '',
   address: '',
   npwp: '',

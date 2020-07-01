@@ -13,17 +13,17 @@ import {
   Mutation,
   VuexModule,
 } from 'vuex-module-decorators';
-import store from '../';
+import store from '..';
 import {
-  createOneCustomer,
-  deleteOneCustomer,
-  fetchCustomer,
-  updateOneCustomer,
-} from '../../common/api/customer';
+  createOnePerpanjangan,
+  deleteOnePerpanjangan,
+  fetchPerpanjangan,
+  updateOnePerpanjangan,
+} from '../../common/api/perpanjangan';
 import {
-  ICustomerData,
-  ICustomerStore,
-} from '../../common/interface/customer.interface';
+  IPerpanjanganData,
+  IPerpanjanganStore,
+} from '../../common/interface/perpanjangan.interface';
 import {
   initErrorState,
   initParams,
@@ -31,30 +31,30 @@ import {
   initSuccessState,
 } from '../../common/utils/initialValue';
 
-@Module({ dynamic: true, store, name: 'CustomerModule' })
-class Customer extends VuexModule implements ICustomerStore {
-  isLoadingFetchCustomer = false;
-  isLoadingCreateCustomer = false;
-  isLoadingUpdateCustomer = false;
-  isLoadingDeleteCustomer = false;
-  customers = initResult;
-  paramsCustomer = { ...initParams };
-  isCustomerError = false;
-  customerErrorState = initErrorState;
-  isCustomerSuccess = false;
-  customerSuccessState = initSuccessState;
+@Module({ dynamic: true, store, name: 'PerpanjanganModule' })
+class Perpanjangan extends VuexModule implements IPerpanjanganStore {
+  isLoadingFetchPerpanjangan = false;
+  isLoadingCreatePerpanjangan = false;
+  isLoadingUpdatePerpanjangan = false;
+  isLoadingDeletePerpanjangan = false;
+  perpanjangans = initResult;
+  paramsPerpanjangan = { ...initParams };
+  isPerpanjanganError = false;
+  perpanjanganErrorState = initErrorState;
+  isPerpanjanganSuccess = false;
+  perpanjanganSuccessState = initSuccessState;
 
   @Action
-  async fetchCustomer(params: IParams) {
+  async fetchPerpanjangan(params: IParams) {
     try {
       this.CLEAN_ACTION();
       this.SET_LOADING_FETCH_CUSTOMER(true);
       const queryString = await generateQueryString(params);
-      const res: any = await fetchCustomer(queryString);
+      const res: any = await fetchPerpanjangan(queryString);
 
       if (res && res.data) {
         this.SET_LOADING_FETCH_CUSTOMER(false);
-        console.info('customer res.data', res.data);
+        console.info('perpanjangan res.data', res.data);
 
         this.SET_CUSTOMERS(res.data);
       } else {
@@ -70,14 +70,14 @@ class Customer extends VuexModule implements ICustomerStore {
   }
 
   @Action
-  async createOneCustomer(data: ICustomerData) {
+  async createOnePerpanjangan(data: IPerpanjanganData) {
     try {
       this.CLEAN_ACTION();
       this.SET_LOADING_CREATE_CUSTOMER(true);
-      const res: any = await createOneCustomer(data);
+      const res: any = await createOnePerpanjangan(data);
       if (res && res.data) {
         this.SET_LOADING_CREATE_CUSTOMER(false);
-        this.fetchCustomer(initParams);
+        this.fetchPerpanjangan(initParams);
       } else {
         this.SET_LOADING_CREATE_CUSTOMER(false);
       }
@@ -89,15 +89,15 @@ class Customer extends VuexModule implements ICustomerStore {
   }
 
   @Action
-  async updateOneCustomer(data: ICustomerData) {
+  async updateOnePerpanjangan(data: IPerpanjanganData) {
     try {
       console.info('action data', data);
       this.CLEAN_ACTION();
       this.SET_LOADING_UPDATE_CUSTOMER(true);
-      const res: any = await updateOneCustomer((data as any).id, data);
+      const res: any = await updateOnePerpanjangan((data as any).id, data);
       if (res) {
         this.SET_LOADING_UPDATE_CUSTOMER(false);
-        this.fetchCustomer(initParams);
+        this.fetchPerpanjangan(initParams);
       } else {
         this.SET_LOADING_UPDATE_CUSTOMER(false);
       }
@@ -109,14 +109,14 @@ class Customer extends VuexModule implements ICustomerStore {
   }
 
   @Action
-  async deleteOneCustomer(id: string) {
+  async deleteOnePerpanjangan(id: string) {
     try {
       this.CLEAN_ACTION();
       this.SET_LOADING_DELETE_CUSTOMER(true);
-      const res: any = await deleteOneCustomer(id);
+      const res: any = await deleteOnePerpanjangan(id);
       if (res) {
         this.SET_LOADING_DELETE_CUSTOMER(false);
-        this.fetchCustomer(initParams);
+        this.fetchPerpanjangan(initParams);
       } else {
         this.SET_LOADING_DELETE_CUSTOMER(false);
       }
@@ -129,56 +129,56 @@ class Customer extends VuexModule implements ICustomerStore {
 
   @Mutation
   SET_CUSTOMERS(payload: IResult) {
-    this.customers = payload;
+    this.perpanjangans = payload;
   }
 
   @Mutation
   CLEAN_ACTION() {
-    this.isCustomerError = false;
-    this.isCustomerSuccess = false;
-    this.customerSuccessState = initSuccessState;
-    this.customerErrorState = initErrorState;
+    this.isPerpanjanganError = false;
+    this.isPerpanjanganSuccess = false;
+    this.perpanjanganSuccessState = initSuccessState;
+    this.perpanjanganErrorState = initErrorState;
   }
 
   @Mutation
   SET_LOADING_FETCH_CUSTOMER(payload: boolean) {
-    this.isLoadingFetchCustomer = payload;
+    this.isLoadingFetchPerpanjangan = payload;
   }
 
   @Mutation
   SET_LOADING_CREATE_CUSTOMER(payload: boolean) {
-    this.isLoadingCreateCustomer = payload;
+    this.isLoadingCreatePerpanjangan = payload;
   }
 
   @Mutation
   SET_LOADING_UPDATE_CUSTOMER(payload: boolean) {
-    this.isLoadingUpdateCustomer = payload;
+    this.isLoadingUpdatePerpanjangan = payload;
   }
 
   @Mutation
   SET_LOADING_DELETE_CUSTOMER(payload: boolean) {
-    this.isLoadingDeleteCustomer = payload;
+    this.isLoadingDeletePerpanjangan = payload;
   }
 
   @Mutation
   SET_INDICATOR_ERROR_CUSTOMER(payload: boolean) {
-    this.isCustomerError = payload;
+    this.isPerpanjanganError = payload;
   }
 
   @Mutation
   SET_ERROR_CUSTOMER(payload: IErrorState) {
-    this.customerErrorState = payload;
+    this.perpanjanganErrorState = payload;
   }
 
   @Mutation
   SET_INDICATOR_SUCCESS_CUSTOMER(payload: boolean) {
-    this.isCustomerSuccess = payload;
+    this.isPerpanjanganSuccess = payload;
   }
 
   @Mutation
   SET_SUCCESS_CUSTOMER(payload: ISuccessState) {
-    this.customerSuccessState = payload;
+    this.perpanjanganSuccessState = payload;
   }
 }
 
-export const CustomerModule = getModule(Customer);
+export const PerpanjanganModule = getModule(Perpanjangan);

@@ -3,9 +3,9 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Account from '../views/account/Account.vue';
 import Billboard from '../views/billboard/Billboard.vue';
-import Customer from '../views/customer/Customer.vue';
 import Dashboard from '../views/dashboard/Dashboard.vue';
 import Kmeans from '../views/kmeans/Kmeans.vue';
+import Perpanjangan from '../views/perpanjangan/Perpanjangan.vue';
 import Subdistrict from '../views/subdistrict/Subdistrict.vue';
 
 Vue.use(Router);
@@ -76,11 +76,11 @@ export const routes: any[] = [
     },
   },
   {
-    path: '/customer',
-    name: 'customer',
-    component: Customer,
+    path: '/perpanjangan',
+    name: 'perpanjangan',
+    component: Perpanjangan,
     meta: {
-      title: 'Customer',
+      title: 'Perpanjangan',
       requiredAuth: true,
     },
   },
@@ -94,11 +94,11 @@ export const routes: any[] = [
     },
   },
   {
-    path: '/customer',
-    name: 'customer',
-    component: Customer,
+    path: '/perpanjangan',
+    name: 'perpanjangan',
+    component: Perpanjangan,
     meta: {
-      title: 'Customer',
+      title: 'Perpanjangan',
       requiredAuth: true,
     },
   },

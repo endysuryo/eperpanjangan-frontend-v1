@@ -1,14 +1,14 @@
-import { initCustomerData } from '@/common/utils/initialValue';
-import { Hooper, Navigation, Slide } from 'hooper';
-import 'hooper/dist/hooper.css';
+import { initPerpanjanganData } from './node_modules/@/common/utils/initialValue';
+import { Hooper, Navigation, Slide } from './node_modules/hooper';
+import './node_modules/hooper/dist/hooper.css';
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
-import { ICustomerData } from '../../common/interface/customer.interface';
+import { IPerpanjanganData } from '../../common/interface/perpanjangan.interface';
 import HeaderPage from '../../components/HeaderPage.vue';
-import { CustomerModule } from '../../store/modules/customer';
+import { PerpanjanganModule } from '../../store/modules/perpanjangan';
 
 @Component({
-  name: 'Customer',
+  name: 'Perpanjangan',
   components: {
     HeaderPage,
     Hooper,
@@ -16,12 +16,12 @@ import { CustomerModule } from '../../store/modules/customer';
     Navigation,
   },
 })
-export default class Customer extends Vue {
+export default class Perpanjangan extends Vue {
   isCreateTitle: boolean = true;
   search: any = '';
   dialog: boolean = false;
   dialogReset: boolean = false;
-  customerData: ICustomerData = Object.assign({}, initCustomerData);
+  perpanjanganData: IPerpanjanganData = Object.assign({}, initPerpanjanganData);
 
   itemWillBeDeleted: any = {};
   dialogConfirmDelete: boolean = false;
@@ -75,28 +75,28 @@ export default class Customer extends Vue {
   ];
 
   mounted() {
-    this.getCustomerList();
+    this.getPerpanjanganList();
   }
 
   get params() {
-    return CustomerModule.paramsCustomer;
+    return PerpanjanganModule.paramsPerpanjangan;
   }
 
-  get customers() {
-    console.info(CustomerModule.customers);
-    return CustomerModule.customers;
+  get perpanjangans() {
+    console.info(PerpanjanganModule.perpanjangans);
+    return PerpanjanganModule.perpanjangans;
   }
 
-  get isLoadingFetchCustomer() {
-    return CustomerModule.isLoadingFetchCustomer;
+  get isLoadingFetchPerpanjangan() {
+    return PerpanjanganModule.isLoadingFetchPerpanjangan;
   }
 
-  getCustomerList() {
-    CustomerModule.fetchCustomer(this.params);
+  getPerpanjanganList() {
+    PerpanjanganModule.fetchPerpanjangan(this.params);
   }
 
   editItem(item: any) {
-    this.editedIndex = this.customers;
+    this.editedIndex = this.perpanjangans;
     this.editedItem = Object.assign({}, item);
     this.isCreateTitle = false;
     this.dialog = true;
@@ -112,7 +112,7 @@ export default class Customer extends Vue {
   }
 
   showFormCreate() {
-    this.customerData = Object.assign({}, initCustomerData);
+    this.perpanjanganData = Object.assign({}, initPerpanjanganData);
     this.dialog = true;
     this.isCreateTitle = true;
   }
@@ -128,7 +128,7 @@ export default class Customer extends Vue {
   }
 
   deleteItem() {
-    CustomerModule.deleteOneCustomer(this.itemWillBeDeleted.id);
+    PerpanjanganModule.deleteOnePerpanjangan(this.itemWillBeDeleted.id);
   }
 
   save() {
@@ -136,7 +136,7 @@ export default class Customer extends Vue {
       ...this.editedItem,
     };
     console.info('itemnya : ', dataAccount);
-    CustomerModule.createOneCustomer(dataAccount);
+    PerpanjanganModule.createOnePerpanjangan(dataAccount);
     this.dialog = false;
   }
 
@@ -145,7 +145,7 @@ export default class Customer extends Vue {
     const dataAccount: any = {
       ...this.editedItem,
     };
-    CustomerModule.updateOneCustomer(dataAccount);
+    PerpanjanganModule.updateOnePerpanjangan(dataAccount);
     this.dialog = false;
   }
 }

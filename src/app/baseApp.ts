@@ -20,7 +20,7 @@ export default class BaseApp extends Vue {
     // { icon: 'mdi-chart-line', text: 'Kmeans', routeName: 'kmeans' },
   ];
   itemsCourse: any = [
-    { icon: 'mdi-file-document', text: 'Pengajuan', routeName: 'customer' },
+    { icon: 'mdi-file-document', text: 'Pengajuan', routeName: 'perpanjangan' },
     { icon: 'mdi-file-document', text: 'Laporan', routeName: 'billboard' },
     // { icon: 'mdi-map', text: 'Data Kecamatan', routeName: 'subdistrict' },
   ];
