@@ -79,6 +79,7 @@ class Perpanjangan extends VuexModule implements IPerpanjanganStore {
         this.SET_LOADING_CREATE_CUSTOMER(false);
         this.fetchPerpanjangan(initParams);
       } else {
+        this.fetchPerpanjangan(initParams);
         this.SET_LOADING_CREATE_CUSTOMER(false);
       }
     } catch (error) {
@@ -94,7 +95,7 @@ class Perpanjangan extends VuexModule implements IPerpanjanganStore {
       console.info('action data', data);
       this.CLEAN_ACTION();
       this.SET_LOADING_UPDATE_CUSTOMER(true);
-      const res: any = await updateOnePerpanjangan((data as any).id, data);
+      const res: any = await updateOnePerpanjangan((data as any)._id, data);
       if (res) {
         this.SET_LOADING_UPDATE_CUSTOMER(false);
         this.fetchPerpanjangan(initParams);

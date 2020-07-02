@@ -3,13 +3,13 @@ import { requestPerpanjangan } from '../utils/request';
 
 export const fetchPerpanjangan = (queryString: string) =>
   requestPerpanjangan({
-    url: `/perpanjangans${queryString ? '?' + queryString : ''}`,
+    url: `/perpanjangan${queryString ? '?' + queryString : ''}`,
     method: 'get',
   });
 
 export const createOnePerpanjangan = (data: IPerpanjanganData) =>
   requestPerpanjangan({
-    url: '/perpanjangans',
+    url: '/perpanjangan',
     method: 'post',
     data,
   });
@@ -19,7 +19,7 @@ export const updateOnePerpanjangan = (
   data: Partial<IPerpanjanganData>,
 ) => {
   return requestPerpanjangan({
-    url: '/perpanjangans/' + id,
+    url: '/perpanjangan/' + id,
     method: 'patch',
     data,
   });
@@ -27,6 +27,6 @@ export const updateOnePerpanjangan = (
 
 export const deleteOnePerpanjangan = (id: string) =>
   requestPerpanjangan({
-    url: '/perpanjangans/' + id,
+    url: '/perpanjangan/' + id,
     method: 'delete',
   });

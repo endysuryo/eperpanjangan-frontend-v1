@@ -2,11 +2,8 @@ import Login from '@/views/login/Login.vue';
 import Vue from 'vue';
 import Router from 'vue-router';
 import Account from '../views/account/Account.vue';
-import Billboard from '../views/billboard/Billboard.vue';
 import Dashboard from '../views/dashboard/Dashboard.vue';
-import Kmeans from '../views/kmeans/Kmeans.vue';
 import Perpanjangan from '../views/perpanjangan/Perpanjangan.vue';
-import Subdistrict from '../views/subdistrict/Subdistrict.vue';
 
 Vue.use(Router);
 
@@ -67,15 +64,6 @@ export const routes: any[] = [
     },
   },
   {
-    path: '/kmeans',
-    name: 'kmeans',
-    component: Kmeans,
-    meta: {
-      title: 'Kmeans',
-      requiredAuth: true,
-    },
-  },
-  {
     path: '/perpanjangan',
     name: 'perpanjangan',
     component: Perpanjangan,
@@ -85,29 +73,11 @@ export const routes: any[] = [
     },
   },
   {
-    path: '/billboard',
-    name: 'billboard',
-    component: Billboard,
-    meta: {
-      title: 'Billboard',
-      requiredAuth: true,
-    },
-  },
-  {
     path: '/perpanjangan',
     name: 'perpanjangan',
     component: Perpanjangan,
     meta: {
       title: 'Perpanjangan',
-      requiredAuth: true,
-    },
-  },
-  {
-    path: '/subdistrict',
-    name: 'subdistrict',
-    component: Subdistrict,
-    meta: {
-      title: 'Subdistrict',
       requiredAuth: true,
     },
   },
