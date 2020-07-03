@@ -64,6 +64,7 @@ export default class Perpanjangan extends Vue {
     user_id: '',
     created_at: '',
   };
+  image_kp_lama: any = '';
   rules: any = [
     (value: { size: number }) =>
       !value || value.size < 2000000 || 'Image size should be less than 2 MB!',
@@ -153,7 +154,9 @@ export default class Perpanjangan extends Vue {
     this.dialog = true;
   }
 
-  // handleImage(e);
+  selectedImage(event: any) {
+    console.info('hello : ', event);
+  }
 
   close() {
     this.dialog = false;
