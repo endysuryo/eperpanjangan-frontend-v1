@@ -37,7 +37,7 @@ class Perpanjangan extends VuexModule implements IPerpanjanganStore {
   isLoadingCreatePerpanjangan = false;
   isLoadingUpdatePerpanjangan = false;
   isLoadingDeletePerpanjangan = false;
-  perpanjangans = initResult;
+  perpanjangans = [];
   paramsPerpanjangan = { ...initParams };
   isPerpanjanganError = false;
   perpanjanganErrorState = initErrorState;
@@ -59,11 +59,11 @@ class Perpanjangan extends VuexModule implements IPerpanjanganStore {
         this.SET_CUSTOMERS(res.data);
       } else {
         this.SET_LOADING_FETCH_CUSTOMER(false);
-        this.SET_CUSTOMERS(initResult);
+        this.SET_CUSTOMERS([]);
       }
     } catch (error) {
       this.SET_LOADING_FETCH_CUSTOMER(false);
-      this.SET_CUSTOMERS(initResult);
+      this.SET_CUSTOMERS([]);
       this.SET_INDICATOR_ERROR_CUSTOMER(true);
       this.SET_ERROR_CUSTOMER(formatErrorMessage(error));
     }
@@ -129,7 +129,7 @@ class Perpanjangan extends VuexModule implements IPerpanjanganStore {
   }
 
   @Mutation
-  SET_CUSTOMERS(payload: IResult) {
+  SET_CUSTOMERS(payload: []) {
     this.perpanjangans = payload;
   }
 

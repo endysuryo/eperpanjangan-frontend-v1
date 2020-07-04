@@ -189,12 +189,12 @@ export default class Perpanjangan extends Vue {
 
   save() {
     console.info('kb_lama: ', this.editedItem.kp_lama);
-    // const dataAccount: any = {
-    //   ...this.editedItem,
-    //   created_at: moment().format('LLL'),
-    // };
-    // PerpanjanganModule.createOnePerpanjangan(dataAccount);
-    // this.close();
+    const dataAccount: any = {
+      ...this.editedItem,
+      created_at: moment().format('LLL'),
+    };
+    PerpanjanganModule.createOnePerpanjangan(dataAccount);
+    this.close();
   }
 
   update() {

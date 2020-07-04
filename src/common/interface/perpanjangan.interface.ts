@@ -5,7 +5,7 @@ export interface IPerpanjanganStore {
   isLoadingCreatePerpanjangan: boolean;
   isLoadingUpdatePerpanjangan: boolean;
   isLoadingDeletePerpanjangan: boolean;
-  perpanjangans: IResult;
+  perpanjangans: any[];
   paramsPerpanjangan: IParams;
   isPerpanjanganError: boolean;
   perpanjanganErrorState: IErrorState;
