@@ -21,8 +21,8 @@
 
     <v-card color="primary mb-5" dark v-if="search_mode && !create_mode">
       <v-card-title class="headline">
-        <v-text-field outlined label="Kode Pengajuan"></v-text-field>
-        <v-btn text block @click="search_mode = !search_mode">
+        <v-text-field v-model="kode" outlined label="Kode Pengajuan"></v-text-field>
+        <v-btn text block @click="searchPerpanjangan">
           Cari
           <v-icon class="mr-2">mdi-arrow-right</v-icon>
         </v-btn>
@@ -51,7 +51,7 @@
       v-if="!create_mode && search_mode"
       block
       @click="create_mode = !create_mode"
-      color="primary"
+      color="success"
     >Input Pengajuan</v-btn>
 
     <v-card class="mx-auto" v-if="create_mode">

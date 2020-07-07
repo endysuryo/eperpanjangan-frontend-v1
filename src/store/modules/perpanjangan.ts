@@ -17,6 +17,7 @@ import store from '..';
 import {
   createOnePerpanjangan,
   deleteOnePerpanjangan,
+  fetchOnePerpanjangan,
   fetchPerpanjangan,
   updateOnePerpanjangan,
 } from '../../common/api/perpanjangan';
@@ -70,6 +71,60 @@ class Perpanjangan extends VuexModule implements IPerpanjanganStore {
   }
 
   @Action
+  async fetchPendingPerpanjangan(params: IParams) {
+    try {
+      this.CLEAN_ACTION();
+      this.SET_LOADING_FETCH_CUSTOMER(true);
+      const queryString = await generateQueryString(params);
+      const res: any = await fetchPerpanjangan(queryString);
+
+      if (res && res.data) {
+        this.SET_LOADING_FETCH_CUSTOMER(false);
+        console.info('perpanjangan res.data', res.data);
+
+        const tempArray: any = res.data.filter((el: any) => {
+          return el.status === 'PENDING';
+        });
+
+        this.SET_CUSTOMERS(tempArray);
+      } else {
+        this.SET_LOADING_FETCH_CUSTOMER(false);
+        this.SET_CUSTOMERS([]);
+      }
+    } catch (error) {
+      this.SET_LOADING_FETCH_CUSTOMER(false);
+      this.SET_CUSTOMERS([]);
+      this.SET_INDICATOR_ERROR_CUSTOMER(true);
+      this.SET_ERROR_CUSTOMER(formatErrorMessage(error));
+    }
+  }
+
+  @Action
+  async fetchOnePerpanjangan(kode: string) {
+    try {
+      console.info('masuk module: ', kode);
+      this.CLEAN_ACTION();
+      this.SET_LOADING_FETCH_CUSTOMER(true);
+      const res: any = await fetchOnePerpanjangan(kode);
+
+      if (res && res.data) {
+        this.SET_LOADING_FETCH_CUSTOMER(false);
+        console.info('perpanjangan res.data', res.data);
+
+        this.SET_CUSTOMERS(res.data);
+      } else {
+        this.SET_LOADING_FETCH_CUSTOMER(false);
+        this.SET_CUSTOMERS([]);
+      }
+    } catch (error) {
+      this.SET_LOADING_FETCH_CUSTOMER(false);
+      this.SET_CUSTOMERS([]);
+      this.SET_INDICATOR_ERROR_CUSTOMER(true);
+      this.SET_ERROR_CUSTOMER(formatErrorMessage(error));
+    }
+  }
+
+  @Action
   async createOnePerpanjangan(data: IPerpanjanganData) {
     try {
       this.CLEAN_ACTION();
@@ -98,7 +153,7 @@ class Perpanjangan extends VuexModule implements IPerpanjanganStore {
       const res: any = await updateOnePerpanjangan((data as any)._id, data);
       if (res) {
         this.SET_LOADING_UPDATE_CUSTOMER(false);
-        this.fetchPerpanjangan(initParams);
+        this.fetchPendingPerpanjangan(initParams);
       } else {
         this.SET_LOADING_UPDATE_CUSTOMER(false);
       }

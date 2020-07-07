@@ -7,6 +7,12 @@ export const fetchPerpanjangan = (queryString: string) =>
     method: 'get',
   });
 
+export const fetchOnePerpanjangan = (id: string) =>
+  requestPerpanjangan({
+    url: `/perpanjangan/${id}`,
+    method: 'get',
+  });
+
 export const createOnePerpanjangan = (data: IPerpanjanganData) =>
   requestPerpanjangan({
     url: '/perpanjangan',

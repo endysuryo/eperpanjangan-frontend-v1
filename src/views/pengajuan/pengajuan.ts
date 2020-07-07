@@ -53,6 +53,7 @@ export default class Pengajuan extends Vue {
   search_mode: boolean = true;
   create_mode: boolean = false;
   dialog: boolean = false;
+  kode: string = '';
 
   created() {
     this.getPerpanjanganList();
@@ -154,5 +155,12 @@ export default class Pengajuan extends Vue {
         this.perpanjanganItem.sk_trayek =
           'http://localhost:3000/perpanjangan/image/' + res.data.filename;
       });
+  }
+
+  async searchPerpanjangan() {
+    const kode: string = this.kode;
+    console.info('idnya ', kode);
+    PerpanjanganModule.fetchOnePerpanjangan(kode);
+    this.search_mode = false;
   }
 }

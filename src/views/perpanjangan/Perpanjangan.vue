@@ -53,26 +53,26 @@
                     <v-img :src="editedItem.sk_trayek" contain class="grey darken-4"></v-img>
                     <v-card-text>SK Trayek</v-card-text>
                   </v-card>
-                  <v-text-field v-model="editedItem.biaya" label="Biaya"></v-text-field>
-                  <v-text-field v-model="editedItem.denda" label="Denda"></v-text-field>
-                  <v-text-field v-model="editedItem.status" label="Status"></v-text-field>
-                  <v-text-field v-model="editedItem.approve_at" label="Disetujui Tanggal"></v-text-field>
+                  <v-text-field v-model="editedItem.biaya" label="Biaya" prefix="Rp." class="mt-10"></v-text-field>
+                  <v-text-field v-model="editedItem.denda" label="Denda" prefix="Rp. "></v-text-field>
+                  <v-textarea label="Keterangan" v-model="editedItem.keterangan"></v-textarea>
                 </v-container>
               </v-card-text>
 
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
-                <v-btn v-if="isCreateTitle" color="blue darken-1" text @click="save">Save</v-btn>
-                <v-btn v-if="!isCreateTitle" color="blue darken-1" text @click="update">Update</v-btn>
+                <v-btn color="error" @click="update('REJECT')">Tolak</v-btn>
+                <v-btn color="success" @click="update('APPROVE')">Setujui</v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>
         </v-toolbar>
       </template>
       <template v-slot:item.actions="{ item }">
-        <v-icon small class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
-        <v-icon small @click="showConfirmDeleteItem(item)">mdi-delete</v-icon>
+        <v-btn color="primary" small class="white--text" @click="editItem(item)">
+          Tinjau
+          <v-icon right dark>mdi-arrow-right</v-icon>
+        </v-btn>
       </template>
     </v-data-table>
     <!-- Delete Dialog -->

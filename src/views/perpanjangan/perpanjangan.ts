@@ -126,7 +126,7 @@ export default class Perpanjangan extends Vue {
   }
 
   getPerpanjanganList() {
-    PerpanjanganModule.fetchPerpanjangan(this.params);
+    PerpanjanganModule.fetchPendingPerpanjangan(this.params);
   }
 
   editItem(item: any) {
@@ -155,35 +155,12 @@ export default class Perpanjangan extends Vue {
     this.isCreateTitle = true;
   }
 
-  showConfirmDeleteItem(item: any) {
-    this.itemWillBeDeleted = Object.assign({}, item);
-    this.dialogConfirmDelete = true;
-  }
-
-  cancelDelete() {
-    this.itemWillBeDeleted = {};
-    this.dialogConfirmDelete = false;
-  }
-
-  deleteItem() {
-    PerpanjanganModule.deleteOnePerpanjangan(this.itemWillBeDeleted._id);
-  }
-
-  save() {
-    console.info('kb_lama: ', this.editedItem.kp_lama);
-    const dataAccount: any = {
+  update(status: string) {
+    const dataPerpanjangan: any = {
       ...this.editedItem,
-      created_at: moment().format('LLL'),
+      status,
     };
-    PerpanjanganModule.createOnePerpanjangan(dataAccount);
-    this.close();
-  }
-
-  update() {
-    const dataAccount: any = {
-      ...this.editedItem,
-    };
-    PerpanjanganModule.updateOnePerpanjangan(dataAccount);
+    PerpanjanganModule.updateOnePerpanjangan(dataPerpanjangan);
     this.dialog = false;
   }
 }
