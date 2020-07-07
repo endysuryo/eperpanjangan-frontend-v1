@@ -3,6 +3,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Account from '../views/account/Account.vue';
 import Dashboard from '../views/dashboard/Dashboard.vue';
+import Pengajuan from '../views/pengajuan/Pengajuan.vue';
 import Perpanjangan from '../views/perpanjangan/Perpanjangan.vue';
 
 Vue.use(Router);
@@ -73,11 +74,11 @@ export const routes: any[] = [
     },
   },
   {
-    path: '/perpanjangan',
-    name: 'perpanjangan',
-    component: Perpanjangan,
+    path: '/pengajuan',
+    name: 'pengajuan',
+    component: Pengajuan,
     meta: {
-      title: 'Perpanjangan',
+      title: 'Pengajuan',
       requiredAuth: true,
     },
   },

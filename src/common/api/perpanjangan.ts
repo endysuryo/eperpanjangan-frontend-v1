@@ -30,3 +30,9 @@ export const deleteOnePerpanjangan = (id: string) =>
     url: '/perpanjangan/' + id,
     method: 'delete',
   });
+
+export const uploadImage = (id: string) =>
+  requestPerpanjangan({
+    url: '/perpanjangan/' + id,
+    method: 'delete',
+  });

@@ -84,6 +84,12 @@ export default class Perpanjangan extends Vue {
       value: 'created_at',
     },
     {
+      text: 'Kode Perpanjangan',
+      align: 'start',
+      sortable: false,
+      value: 'kode_perpanjangan',
+    },
+    {
       text: 'Jenis Angkutan',
       align: 'start',
       sortable: false,
@@ -94,30 +100,6 @@ export default class Perpanjangan extends Vue {
       align: 'start',
       sortable: false,
       value: 'nama_po',
-    },
-    {
-      text: 'TNKB',
-      align: 'start',
-      sortable: false,
-      value: 'tnkb',
-    },
-    {
-      text: 'KP Lama',
-      align: 'start',
-      sortable: false,
-      value: 'kp_lama',
-    },
-    {
-      text: 'Jasa Raharja',
-      align: 'start',
-      sortable: false,
-      value: 'jasa_raharja',
-    },
-    {
-      text: 'STNK',
-      align: 'start',
-      sortable: false,
-      value: 'stnk',
     },
     { text: 'Actions', value: 'actions', sortable: false },
   ];

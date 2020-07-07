@@ -22,31 +22,37 @@
           </v-toolbar-title>
           <v-spacer></v-spacer>
           <v-btn color="primary" dark class="mb-2" @click="showFormCreate">Create Perpanjangan</v-btn>
-          <v-dialog v-model="dialog" max-width="500px">
+          <v-dialog v-model="dialog" max-width="800px">
             <v-card>
               <v-card-title>
-                <span class="headline">{{ isCreateTitle ? 'Create' : 'Edit' }} Perpanjangan</span>
+                <span class="headline">{{ isCreateTitle ? 'Create' : 'Tinjau' }} Perpanjangan</span>
               </v-card-title>
 
               <v-card-text>
                 <v-container>
-                  <v-text-field v-model="editedItem.jenis_angkutan" label="Jenis Angkutan"></v-text-field>
-                  <v-text-field v-model="editedItem.nama_po" label="Nama PO"></v-text-field>
-                  <v-text-field v-model="editedItem.tnkb" label="TNKB"></v-text-field>
-                  <div class="d-flex justify left">
-                    <v-file-input
-                      accept="image/png, image/jpeg, image/bmp"
-                      placeholder="Pick an avatar"
-                      prepend-icon="mdi-camera"
-                      label="KP Lama"
-                      @change="selectedImage('kp_lama')"
-                    ></v-file-input>
-                    <v-btn text @click="uploadImage('kp_lama')"></v-btn>
-                  </div>
-                  <v-text-field v-model="editedItem.jasa_raharja" label="Jasa Raharja"></v-text-field>
-                  <v-text-field v-model="editedItem.stnk" label="STNK"></v-text-field>
-                  <v-text-field v-model="editedItem.surat_rekomendasi" label="Surat Rekomendasi"></v-text-field>
-                  <v-text-field v-model="editedItem.sk_trayek" label="SK Trayek"></v-text-field>
+                  <v-text-field v-model="editedItem.jenis_angkutan" label="Jenis Angkutan" readonly></v-text-field>
+                  <v-text-field v-model="editedItem.nama_po" label="Nama PO" readonly></v-text-field>
+                  <v-text-field v-model="editedItem.tnkb" label="TNKB" readonly></v-text-field>
+                  <v-card elevation="10" class="ma-3">
+                    <v-img :src="editedItem.kp_lama" contain class="grey darken-4"></v-img>
+                    <v-card-text>KP Lama</v-card-text>
+                  </v-card>
+                  <v-card elevation="10" class="ma-3">
+                    <v-img :src="editedItem.jasa_raharja" contain class="grey darken-4"></v-img>
+                    <v-card-text>Jasa Raharja</v-card-text>
+                  </v-card>
+                  <v-card elevation="10" class="ma-3">
+                    <v-img :src="editedItem.stnk" contain class="grey darken-4"></v-img>
+                    <v-card-text>STNK</v-card-text>
+                  </v-card>
+                  <v-card elevation="10" class="ma-3">
+                    <v-img :src="editedItem.surat_rekomendasi" contain class="grey darken-4"></v-img>
+                    <v-card-text>Surat Rekomendasi</v-card-text>
+                  </v-card>
+                  <v-card elevation="10" class="ma-3">
+                    <v-img :src="editedItem.sk_trayek" contain class="grey darken-4"></v-img>
+                    <v-card-text>SK Trayek</v-card-text>
+                  </v-card>
                   <v-text-field v-model="editedItem.biaya" label="Biaya"></v-text-field>
                   <v-text-field v-model="editedItem.denda" label="Denda"></v-text-field>
                   <v-text-field v-model="editedItem.status" label="Status"></v-text-field>
