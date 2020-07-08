@@ -64,7 +64,6 @@ export default class Pengajuan extends Vue {
   }
 
   get perpanjangans() {
-    console.info(PerpanjanganModule.perpanjangans);
     return PerpanjanganModule.perpanjangans;
   }
 
@@ -162,5 +161,39 @@ export default class Pengajuan extends Vue {
     console.info('idnya ', kode);
     PerpanjanganModule.fetchOnePerpanjangan(kode);
     this.search_mode = false;
+  }
+
+  async close() {
+    this.dialog = false;
+    this.create_mode = false;
+    this.search_mode = true;
+    this.userItem = {
+      kode_perpanjangan: '',
+      first_name: '',
+      last_name: '',
+      telephone: '',
+      email: '',
+      role: 'user',
+      password: '12345',
+    };
+    this.perpanjanganItem = {
+      kode_perpanjangan: '',
+      jenis_angkutan: '',
+      nama_po: '',
+      tnkb: '',
+      kp_lama: '',
+      jasa_raharja: '',
+      stnk: '',
+      surat_rekomendasi: '',
+      sk_trayek: '',
+      biaya: '',
+      denda: '',
+      status: 'PENDING',
+      keterangan: '',
+      approve_at: '',
+      admin_id: '',
+      user_id: '',
+      created_at: '',
+    };
   }
 }

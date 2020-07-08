@@ -12,16 +12,11 @@
       <template v-slot:top>
         <v-toolbar flat color="white">
           <v-toolbar-title>
-            <v-text-field
-              v-model="search"
-              append-icon="mdi-magnify"
-              label="Search Perpanjangan"
-              single-line
-              hide-details
-            ></v-text-field>
+            <b>Kelola Perpanjangan</b>
+            <div>
+              <h6>*Proses data ke-1 terlebih dahulu</h6>
+            </div>
           </v-toolbar-title>
-          <v-spacer></v-spacer>
-          <v-btn color="primary" dark class="mb-2" @click="showFormCreate">Create Perpanjangan</v-btn>
           <v-dialog v-model="dialog" max-width="800px">
             <v-card>
               <v-card-title>
@@ -63,6 +58,18 @@
                 <v-spacer></v-spacer>
                 <v-btn color="error" @click="update('REJECT')">Tolak</v-btn>
                 <v-btn color="success" @click="update('APPROVE')">Setujui</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+          <v-dialog v-model="alert" max-width="290">
+            <v-card>
+              <v-card-title class="headline">Peringatan</v-card-title>
+
+              <v-card-text>Harap proses data ke-1 terlebih dahulu</v-card-text>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="error" text @click="alert = false">Ok</v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>

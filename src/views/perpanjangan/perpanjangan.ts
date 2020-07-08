@@ -23,6 +23,7 @@ export default class Perpanjangan extends Vue {
   isCreateTitle: boolean = true;
   search: any = '';
   dialog: boolean = false;
+  alert: boolean = false;
   dialogReset: boolean = false;
   perpanjanganData: IPerpanjanganData = Object.assign({}, initPerpanjanganData);
 
@@ -130,10 +131,19 @@ export default class Perpanjangan extends Vue {
   }
 
   editItem(item: any) {
-    this.editedIndex = this.perpanjangans;
-    this.editedItem = Object.assign({}, item);
-    this.isCreateTitle = false;
-    this.dialog = true;
+    const arrayIndex = this.perpanjangans.findIndex(
+      (el: any) => el.kode_perpanjangan === item.kode_perpanjangan,
+    );
+
+    console.info('index ke = ', arrayIndex);
+    if (arrayIndex === 0) {
+      this.editedIndex = this.perpanjangans;
+      this.editedItem = Object.assign({}, item);
+      this.isCreateTitle = false;
+      this.dialog = true;
+    } else {
+      this.alert = true;
+    }
   }
 
   selectedImage(event: any) {

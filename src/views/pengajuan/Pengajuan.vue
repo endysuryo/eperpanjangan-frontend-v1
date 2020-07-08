@@ -1,6 +1,6 @@
 <template>
   <div>
-    <HeaderPage />
+    <!-- <HeaderPage /> -->
     <v-dialog v-model="dialog" max-width="400">
       <v-card>
         <v-card-title class="headline">
@@ -14,14 +14,17 @@
 
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="primary" text @click="dialog = false">Tutup</v-btn>
+          <v-btn color="primary" text @click="close">Tutup</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
-
+    <div class="mb-5">
+      <h2>E-KP / KJP</h2>
+      <h5>Dinas Perhubungan Prov. Jateng</h5>
+    </div>
     <v-card color="primary mb-5" dark v-if="search_mode && !create_mode">
       <v-card-title class="headline">
-        <v-text-field v-model="kode" outlined label="Kode Pengajuan"></v-text-field>
+        <v-text-field v-model="kode" outlined label="Masukkan Kode Pengajuan"></v-text-field>
         <v-btn text block @click="searchPerpanjangan">
           Cari
           <v-icon class="mr-2">mdi-arrow-right</v-icon>
@@ -30,14 +33,51 @@
     </v-card>
 
     <v-card color="primary mb-5" dark v-else-if="!search_mode && !create_mode">
-      <v-card-title class="headline">Kode Pengajuan : 5aZ5c</v-card-title>
+      <v-card-title class="headline">Kode Pengajuan : {{ perpanjangans.kode_perpanjangan }}</v-card-title>
 
       <v-card-subtitle>
         Status :
-        <v-chip class="ma-2" color="error" text-color="white">Ditolak</v-chip>
+        <v-chip
+          v-if="perpanjangans.status === 'APPROVE'"
+          class="ma-2"
+          color="success"
+          text-color="white"
+        >Diterima</v-chip>
+        <v-chip
+          v-else-if="perpanjangans.status === 'REJECT'"
+          class="ma-2"
+          color="error"
+          text-color="white"
+        >Ditolak</v-chip>
+        <v-chip
+          v-else-if="perpanjangans.status === 'PENDING'"
+          class="ma-2"
+          color="warning"
+          text-color="white"
+        >Menunggu</v-chip>
       </v-card-subtitle>
 
-      <v-card-text>Pengajuan anda ditolak, silahkan ulang atau hubungi admin.</v-card-text>
+      <v-card-text v-if="perpanjangans.status === 'APPROVE'">
+        Pengajuan anda diterima, silahkan hubungi admin untuk melakukan verifikasi berkas dan pembayaran.
+        <div class="mt-5">
+          Biaya :
+          <b>Rp. {{ perpanjangans.biaya }}</b>
+        </div>
+        <div>
+          Denda :
+          <b>Rp. {{ perpanjangans.denda }}</b>
+        </div>
+      </v-card-text>
+      <v-card-text v-else-if="perpanjangans.status === 'REJECT'">
+        Pengajuan anda ditolak, silahkan ulang atau hubungi admin.
+        <div class="mt-5">
+          Alasan :
+          <b>{{ perpanjangans.keterangan }}</b>
+        </div>
+      </v-card-text>
+      <v-card-text
+        v-else-if="perpanjangans.status === 'PENDING'"
+      >Pengajuan anda sedang menunggu persetujuan, harap tunggu.</v-card-text>
 
       <v-card-actions>
         <v-spacer></v-spacer>
@@ -119,6 +159,7 @@
         <v-btn color="primary" block @click="save">Ajukan</v-btn>
       </v-card-actions>
     </v-card>
+    <v-btn v-if="create_mode" color="error" block text @click="close" class="mt-5">Batal</v-btn>
   </div>
 </template>
 
