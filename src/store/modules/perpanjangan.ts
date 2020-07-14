@@ -49,24 +49,24 @@ class Perpanjangan extends VuexModule implements IPerpanjanganStore {
   async fetchPerpanjangan(params: IParams) {
     try {
       this.CLEAN_ACTION();
-      this.SET_LOADING_FETCH_CUSTOMER(true);
+      this.SET_LOADING_FETCH_PERPANJANGAN(true);
       const queryString = await generateQueryString(params);
       const res: any = await fetchPerpanjangan(queryString);
 
       if (res && res.data) {
-        this.SET_LOADING_FETCH_CUSTOMER(false);
+        this.SET_LOADING_FETCH_PERPANJANGAN(false);
         console.info('perpanjangan res.data', res.data);
 
-        this.SET_CUSTOMERS(res.data);
+        this.SET_PERPANJANGANS(res.data);
       } else {
-        this.SET_LOADING_FETCH_CUSTOMER(false);
-        this.SET_CUSTOMERS([]);
+        this.SET_LOADING_FETCH_PERPANJANGAN(false);
+        this.SET_PERPANJANGANS([]);
       }
     } catch (error) {
-      this.SET_LOADING_FETCH_CUSTOMER(false);
-      this.SET_CUSTOMERS([]);
-      this.SET_INDICATOR_ERROR_CUSTOMER(true);
-      this.SET_ERROR_CUSTOMER(formatErrorMessage(error));
+      this.SET_LOADING_FETCH_PERPANJANGAN(false);
+      this.SET_PERPANJANGANS([]);
+      this.SET_INDICATOR_ERROR_PERPANJANGAN(true);
+      this.SET_ERROR_PERPANJANGAN(formatErrorMessage(error));
     }
   }
 
@@ -74,53 +74,53 @@ class Perpanjangan extends VuexModule implements IPerpanjanganStore {
   async fetchPendingPerpanjangan(params: IParams) {
     try {
       this.CLEAN_ACTION();
-      this.SET_LOADING_FETCH_CUSTOMER(true);
+      this.SET_LOADING_FETCH_PERPANJANGAN(true);
       const queryString = await generateQueryString(params);
       const res: any = await fetchPerpanjangan(queryString);
 
       if (res && res.data) {
-        this.SET_LOADING_FETCH_CUSTOMER(false);
+        this.SET_LOADING_FETCH_PERPANJANGAN(false);
         console.info('perpanjangan res.data', res.data);
 
         const tempArray: any = res.data.filter((el: any) => {
           return el.status === 'PENDING';
         });
 
-        this.SET_CUSTOMERS(tempArray);
+        this.SET_PERPANJANGANS(tempArray);
       } else {
-        this.SET_LOADING_FETCH_CUSTOMER(false);
-        this.SET_CUSTOMERS([]);
+        this.SET_LOADING_FETCH_PERPANJANGAN(false);
+        this.SET_PERPANJANGANS([]);
       }
     } catch (error) {
-      this.SET_LOADING_FETCH_CUSTOMER(false);
-      this.SET_CUSTOMERS([]);
-      this.SET_INDICATOR_ERROR_CUSTOMER(true);
-      this.SET_ERROR_CUSTOMER(formatErrorMessage(error));
+      this.SET_LOADING_FETCH_PERPANJANGAN(false);
+      this.SET_PERPANJANGANS([]);
+      this.SET_INDICATOR_ERROR_PERPANJANGAN(true);
+      this.SET_ERROR_PERPANJANGAN(formatErrorMessage(error));
     }
   }
 
   @Action
   async fetchOnePerpanjangan(kode: string) {
     try {
-      console.info('masuk module: ', kode);
+      console.info('masuk module perpanjangan: ', kode);
       this.CLEAN_ACTION();
-      this.SET_LOADING_FETCH_CUSTOMER(true);
+      this.SET_LOADING_FETCH_PERPANJANGAN(true);
       const res: any = await fetchOnePerpanjangan(kode);
 
       if (res && res.data) {
-        this.SET_LOADING_FETCH_CUSTOMER(false);
+        this.SET_LOADING_FETCH_PERPANJANGAN(false);
         console.info('perpanjangan res.data', res.data);
 
-        this.SET_CUSTOMERS(res.data);
+        this.SET_PERPANJANGANS(res.data);
       } else {
-        this.SET_LOADING_FETCH_CUSTOMER(false);
-        this.SET_CUSTOMERS([]);
+        this.SET_LOADING_FETCH_PERPANJANGAN(false);
+        this.SET_PERPANJANGANS([]);
       }
     } catch (error) {
-      this.SET_LOADING_FETCH_CUSTOMER(false);
-      this.SET_CUSTOMERS([]);
-      this.SET_INDICATOR_ERROR_CUSTOMER(true);
-      this.SET_ERROR_CUSTOMER(formatErrorMessage(error));
+      this.SET_LOADING_FETCH_PERPANJANGAN(false);
+      this.SET_PERPANJANGANS([]);
+      this.SET_INDICATOR_ERROR_PERPANJANGAN(true);
+      this.SET_ERROR_PERPANJANGAN(formatErrorMessage(error));
     }
   }
 
@@ -128,19 +128,19 @@ class Perpanjangan extends VuexModule implements IPerpanjanganStore {
   async createOnePerpanjangan(data: IPerpanjanganData) {
     try {
       this.CLEAN_ACTION();
-      this.SET_LOADING_CREATE_CUSTOMER(true);
+      this.SET_LOADING_CREATE_PERPANJANGAN(true);
       const res: any = await createOnePerpanjangan(data);
       if (res && res.data) {
-        this.SET_LOADING_CREATE_CUSTOMER(false);
+        this.SET_LOADING_CREATE_PERPANJANGAN(false);
         this.fetchPerpanjangan(initParams);
       } else {
         this.fetchPerpanjangan(initParams);
-        this.SET_LOADING_CREATE_CUSTOMER(false);
+        this.SET_LOADING_CREATE_PERPANJANGAN(false);
       }
     } catch (error) {
-      this.SET_LOADING_CREATE_CUSTOMER(false);
-      this.SET_INDICATOR_ERROR_CUSTOMER(true);
-      this.SET_ERROR_CUSTOMER(formatErrorMessage(error));
+      this.SET_LOADING_CREATE_PERPANJANGAN(false);
+      this.SET_INDICATOR_ERROR_PERPANJANGAN(true);
+      this.SET_ERROR_PERPANJANGAN(formatErrorMessage(error));
     }
   }
 
@@ -149,18 +149,18 @@ class Perpanjangan extends VuexModule implements IPerpanjanganStore {
     try {
       console.info('action data', data);
       this.CLEAN_ACTION();
-      this.SET_LOADING_UPDATE_CUSTOMER(true);
+      this.SET_LOADING_UPDATE_PERPANJANGAN(true);
       const res: any = await updateOnePerpanjangan((data as any)._id, data);
       if (res) {
-        this.SET_LOADING_UPDATE_CUSTOMER(false);
+        this.SET_LOADING_UPDATE_PERPANJANGAN(false);
         this.fetchPendingPerpanjangan(initParams);
       } else {
-        this.SET_LOADING_UPDATE_CUSTOMER(false);
+        this.SET_LOADING_UPDATE_PERPANJANGAN(false);
       }
     } catch (error) {
-      this.SET_LOADING_UPDATE_CUSTOMER(false);
-      this.SET_INDICATOR_ERROR_CUSTOMER(true);
-      this.SET_ERROR_CUSTOMER(formatErrorMessage(error));
+      this.SET_LOADING_UPDATE_PERPANJANGAN(false);
+      this.SET_INDICATOR_ERROR_PERPANJANGAN(true);
+      this.SET_ERROR_PERPANJANGAN(formatErrorMessage(error));
     }
   }
 
@@ -168,23 +168,23 @@ class Perpanjangan extends VuexModule implements IPerpanjanganStore {
   async deleteOnePerpanjangan(id: string) {
     try {
       this.CLEAN_ACTION();
-      this.SET_LOADING_DELETE_CUSTOMER(true);
+      this.SET_LOADING_DELETE_PERPANJANGAN(true);
       const res: any = await deleteOnePerpanjangan(id);
       if (res) {
-        this.SET_LOADING_DELETE_CUSTOMER(false);
+        this.SET_LOADING_DELETE_PERPANJANGAN(false);
         this.fetchPerpanjangan(initParams);
       } else {
-        this.SET_LOADING_DELETE_CUSTOMER(false);
+        this.SET_LOADING_DELETE_PERPANJANGAN(false);
       }
     } catch (error) {
-      this.SET_LOADING_DELETE_CUSTOMER(false);
-      this.SET_INDICATOR_ERROR_CUSTOMER(true);
-      this.SET_ERROR_CUSTOMER(formatErrorMessage(error));
+      this.SET_LOADING_DELETE_PERPANJANGAN(false);
+      this.SET_INDICATOR_ERROR_PERPANJANGAN(true);
+      this.SET_ERROR_PERPANJANGAN(formatErrorMessage(error));
     }
   }
 
   @Mutation
-  SET_CUSTOMERS(payload: []) {
+  SET_PERPANJANGANS(payload: []) {
     this.perpanjangans = payload;
   }
 
@@ -197,42 +197,42 @@ class Perpanjangan extends VuexModule implements IPerpanjanganStore {
   }
 
   @Mutation
-  SET_LOADING_FETCH_CUSTOMER(payload: boolean) {
+  SET_LOADING_FETCH_PERPANJANGAN(payload: boolean) {
     this.isLoadingFetchPerpanjangan = payload;
   }
 
   @Mutation
-  SET_LOADING_CREATE_CUSTOMER(payload: boolean) {
+  SET_LOADING_CREATE_PERPANJANGAN(payload: boolean) {
     this.isLoadingCreatePerpanjangan = payload;
   }
 
   @Mutation
-  SET_LOADING_UPDATE_CUSTOMER(payload: boolean) {
+  SET_LOADING_UPDATE_PERPANJANGAN(payload: boolean) {
     this.isLoadingUpdatePerpanjangan = payload;
   }
 
   @Mutation
-  SET_LOADING_DELETE_CUSTOMER(payload: boolean) {
+  SET_LOADING_DELETE_PERPANJANGAN(payload: boolean) {
     this.isLoadingDeletePerpanjangan = payload;
   }
 
   @Mutation
-  SET_INDICATOR_ERROR_CUSTOMER(payload: boolean) {
+  SET_INDICATOR_ERROR_PERPANJANGAN(payload: boolean) {
     this.isPerpanjanganError = payload;
   }
 
   @Mutation
-  SET_ERROR_CUSTOMER(payload: IErrorState) {
+  SET_ERROR_PERPANJANGAN(payload: IErrorState) {
     this.perpanjanganErrorState = payload;
   }
 
   @Mutation
-  SET_INDICATOR_SUCCESS_CUSTOMER(payload: boolean) {
+  SET_INDICATOR_SUCCESS_PERPANJANGAN(payload: boolean) {
     this.isPerpanjanganSuccess = payload;
   }
 
   @Mutation
-  SET_SUCCESS_CUSTOMER(payload: ISuccessState) {
+  SET_SUCCESS_PERPANJANGAN(payload: ISuccessState) {
     this.perpanjanganSuccessState = payload;
   }
 }

@@ -1,4 +1,5 @@
 import Login from '@/views/login/Login.vue';
+import Result from '@/views/result/Result.vue';
 import Vue from 'vue';
 import Router from 'vue-router';
 import Account from '../views/account/Account.vue';
@@ -69,7 +70,7 @@ export const routes: any[] = [
     name: 'perpanjangan',
     component: Perpanjangan,
     meta: {
-      title: 'Perpanjangan',
+      title: 'Kelola Perpanjangan',
       requiredAuth: true,
     },
   },
@@ -79,6 +80,15 @@ export const routes: any[] = [
     component: Pengajuan,
     meta: {
       title: 'Pengajuan',
+      requiredAuth: true,
+    },
+  },
+  {
+    path: '/result',
+    name: 'result',
+    component: Result,
+    meta: {
+      title: 'Rekap Perpanjangan',
       requiredAuth: true,
     },
   },

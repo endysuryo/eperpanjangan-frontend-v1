@@ -25,6 +25,11 @@ export default class BaseApp extends Vue {
       text: 'Kelola Perpanjangan',
       routeName: 'perpanjangan',
     },
+    {
+      icon: 'mdi-file-document',
+      text: 'Rekap Perpanjangan',
+      routeName: 'result',
+    },
   ];
 
   mounted(): any {

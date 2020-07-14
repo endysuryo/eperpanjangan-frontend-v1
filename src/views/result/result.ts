@@ -12,7 +12,7 @@ import { PerpanjanganModule } from '../../store/modules/perpanjangan';
 moment.locale('id');
 
 @Component({
-  name: 'Perpanjangan',
+  name: 'Result',
   components: {
     HeaderPage,
     Hooper,
@@ -20,7 +20,7 @@ moment.locale('id');
     Navigation,
   },
 })
-export default class Perpanjangan extends Vue {
+export default class Result extends Vue {
   isCreateTitle: boolean = true;
   search: any = '';
   dialog: boolean = false;
@@ -103,6 +103,12 @@ export default class Perpanjangan extends Vue {
       sortable: false,
       value: 'nama_po',
     },
+    {
+      text: 'Status',
+      align: 'start',
+      sortable: false,
+      value: 'status',
+    },
     { text: 'Actions', value: 'actions', sortable: false },
   ];
 
@@ -131,24 +137,24 @@ export default class Perpanjangan extends Vue {
   }
 
   getPerpanjanganList() {
-    PerpanjanganModule.fetchPendingPerpanjangan(this.params);
+    PerpanjanganModule.fetchPerpanjangan(this.params);
   }
 
   editItem(item: any) {
-    const arrayIndex = this.perpanjangans.findIndex(
-      (el: any) => el.kode_perpanjangan === item.kode_perpanjangan,
-    );
+    // const arrayIndex = this.perpanjangans.findIndex(
+    //   (el: any) => el.kode_perpanjangan === item.kode_perpanjangan,
+    // );
 
-    console.info('index ke = ', arrayIndex);
-    if (arrayIndex === 0) {
-      UserModule.fetchOneUser(item.kode_perpanjangan);
-      this.editedIndex = this.perpanjangans;
-      this.editedItem = Object.assign({}, item);
-      this.isCreateTitle = false;
-      this.dialog = true;
-    } else {
-      this.alert = true;
-    }
+    // console.info('index ke = ', arrayIndex);
+    // if (arrayIndex === 0) {
+    UserModule.fetchOneUser(item.kode_perpanjangan);
+    this.editedIndex = this.perpanjangans;
+    this.editedItem = Object.assign({}, item);
+    this.isCreateTitle = false;
+    this.dialog = true;
+    // } else {
+    //   this.alert = true;
+    // }
   }
 
   selectedImage(event: any) {

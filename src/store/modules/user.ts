@@ -17,6 +17,7 @@ import store from '..';
 import {
   createOneUser,
   deleteOneUser,
+  fetchOneUser,
   fetchUser,
   updateOneUser,
 } from '../../common/api/user';
@@ -45,24 +46,49 @@ class User extends VuexModule implements IUserStore {
   async fetchUser(params: IParams) {
     try {
       this.CLEAN_ACTION();
-      this.SET_LOADING_FETCH_CUSTOMER(true);
+      this.SET_LOADING_FETCH_USER(true);
       const queryString = await generateQueryString(params);
       const res: any = await fetchUser(queryString);
 
       if (res && res.data) {
-        this.SET_LOADING_FETCH_CUSTOMER(false);
+        this.SET_LOADING_FETCH_USER(false);
         console.info('user res.data', res.data);
 
-        this.SET_CUSTOMERS(res.data);
+        this.SET_USERS(res.data);
       } else {
-        this.SET_LOADING_FETCH_CUSTOMER(false);
-        this.SET_CUSTOMERS([]);
+        this.SET_LOADING_FETCH_USER(false);
+        this.SET_USERS([]);
       }
     } catch (error) {
-      this.SET_LOADING_FETCH_CUSTOMER(false);
-      this.SET_CUSTOMERS([]);
-      this.SET_INDICATOR_ERROR_CUSTOMER(true);
-      this.SET_ERROR_CUSTOMER(formatErrorMessage(error));
+      this.SET_LOADING_FETCH_USER(false);
+      this.SET_USERS([]);
+      this.SET_INDICATOR_ERROR_USER(true);
+      this.SET_ERROR_USER(formatErrorMessage(error));
+    }
+  }
+
+  @Action
+  async fetchOneUser(kode: string) {
+    try {
+      console.info('masuk module user: ', kode);
+      this.CLEAN_ACTION();
+      this.SET_LOADING_FETCH_USER(true);
+      const res: any = await fetchOneUser(kode);
+
+      if (res && res.data) {
+        this.SET_LOADING_FETCH_USER(false);
+        console.info('perpanjangan res.data', res.data);
+
+        this.SET_USERS(res.data);
+      } else {
+        this.SET_LOADING_FETCH_USER(false);
+        this.SET_USERS([]);
+      }
+    } catch (error) {
+      this.SET_LOADING_FETCH_USER(false);
+      this.SET_USERS([]);
+      this.SET_INDICATOR_ERROR_USER(true);
+      this.SET_ERROR_USER(formatErrorMessage(error));
     }
   }
 
@@ -70,19 +96,19 @@ class User extends VuexModule implements IUserStore {
   async createOneUser(data: IUserData) {
     try {
       this.CLEAN_ACTION();
-      this.SET_LOADING_CREATE_CUSTOMER(true);
+      this.SET_LOADING_CREATE_USER(true);
       const res: any = await createOneUser(data);
       if (res && res.data) {
-        this.SET_LOADING_CREATE_CUSTOMER(false);
+        this.SET_LOADING_CREATE_USER(false);
         this.fetchUser(initParams);
       } else {
         this.fetchUser(initParams);
-        this.SET_LOADING_CREATE_CUSTOMER(false);
+        this.SET_LOADING_CREATE_USER(false);
       }
     } catch (error) {
-      this.SET_LOADING_CREATE_CUSTOMER(false);
-      this.SET_INDICATOR_ERROR_CUSTOMER(true);
-      this.SET_ERROR_CUSTOMER(formatErrorMessage(error));
+      this.SET_LOADING_CREATE_USER(false);
+      this.SET_INDICATOR_ERROR_USER(true);
+      this.SET_ERROR_USER(formatErrorMessage(error));
     }
   }
 
@@ -91,18 +117,18 @@ class User extends VuexModule implements IUserStore {
     try {
       console.info('action data', data);
       this.CLEAN_ACTION();
-      this.SET_LOADING_UPDATE_CUSTOMER(true);
+      this.SET_LOADING_UPDATE_USER(true);
       const res: any = await updateOneUser((data as any)._id, data);
       if (res) {
-        this.SET_LOADING_UPDATE_CUSTOMER(false);
+        this.SET_LOADING_UPDATE_USER(false);
         this.fetchUser(initParams);
       } else {
-        this.SET_LOADING_UPDATE_CUSTOMER(false);
+        this.SET_LOADING_UPDATE_USER(false);
       }
     } catch (error) {
-      this.SET_LOADING_UPDATE_CUSTOMER(false);
-      this.SET_INDICATOR_ERROR_CUSTOMER(true);
-      this.SET_ERROR_CUSTOMER(formatErrorMessage(error));
+      this.SET_LOADING_UPDATE_USER(false);
+      this.SET_INDICATOR_ERROR_USER(true);
+      this.SET_ERROR_USER(formatErrorMessage(error));
     }
   }
 
@@ -110,23 +136,23 @@ class User extends VuexModule implements IUserStore {
   async deleteOneUser(id: string) {
     try {
       this.CLEAN_ACTION();
-      this.SET_LOADING_DELETE_CUSTOMER(true);
+      this.SET_LOADING_DELETE_USER(true);
       const res: any = await deleteOneUser(id);
       if (res) {
-        this.SET_LOADING_DELETE_CUSTOMER(false);
+        this.SET_LOADING_DELETE_USER(false);
         this.fetchUser(initParams);
       } else {
-        this.SET_LOADING_DELETE_CUSTOMER(false);
+        this.SET_LOADING_DELETE_USER(false);
       }
     } catch (error) {
-      this.SET_LOADING_DELETE_CUSTOMER(false);
-      this.SET_INDICATOR_ERROR_CUSTOMER(true);
-      this.SET_ERROR_CUSTOMER(formatErrorMessage(error));
+      this.SET_LOADING_DELETE_USER(false);
+      this.SET_INDICATOR_ERROR_USER(true);
+      this.SET_ERROR_USER(formatErrorMessage(error));
     }
   }
 
   @Mutation
-  SET_CUSTOMERS(payload: []) {
+  SET_USERS(payload: []) {
     this.users = payload;
   }
 
@@ -139,42 +165,42 @@ class User extends VuexModule implements IUserStore {
   }
 
   @Mutation
-  SET_LOADING_FETCH_CUSTOMER(payload: boolean) {
+  SET_LOADING_FETCH_USER(payload: boolean) {
     this.isLoadingFetchUser = payload;
   }
 
   @Mutation
-  SET_LOADING_CREATE_CUSTOMER(payload: boolean) {
+  SET_LOADING_CREATE_USER(payload: boolean) {
     this.isLoadingCreateUser = payload;
   }
 
   @Mutation
-  SET_LOADING_UPDATE_CUSTOMER(payload: boolean) {
+  SET_LOADING_UPDATE_USER(payload: boolean) {
     this.isLoadingUpdateUser = payload;
   }
 
   @Mutation
-  SET_LOADING_DELETE_CUSTOMER(payload: boolean) {
+  SET_LOADING_DELETE_USER(payload: boolean) {
     this.isLoadingDeleteUser = payload;
   }
 
   @Mutation
-  SET_INDICATOR_ERROR_CUSTOMER(payload: boolean) {
+  SET_INDICATOR_ERROR_USER(payload: boolean) {
     this.isUserError = payload;
   }
 
   @Mutation
-  SET_ERROR_CUSTOMER(payload: IErrorState) {
+  SET_ERROR_USER(payload: IErrorState) {
     this.userErrorState = payload;
   }
 
   @Mutation
-  SET_INDICATOR_SUCCESS_CUSTOMER(payload: boolean) {
+  SET_INDICATOR_SUCCESS_USER(payload: boolean) {
     this.isUserSuccess = payload;
   }
 
   @Mutation
-  SET_SUCCESS_CUSTOMER(payload: ISuccessState) {
+  SET_SUCCESS_USER(payload: ISuccessState) {
     this.userSuccessState = payload;
   }
 }

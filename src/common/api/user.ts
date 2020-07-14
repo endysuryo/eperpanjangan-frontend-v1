@@ -7,6 +7,12 @@ export const fetchUser = (queryString: string) =>
     method: 'get',
   });
 
+export const fetchOneUser = (id: string) =>
+  requestUser({
+    url: `/user/${id}`,
+    method: 'get',
+  });
+
 export const createOneUser = (data: IUserData) =>
   requestUser({
     url: '/user',

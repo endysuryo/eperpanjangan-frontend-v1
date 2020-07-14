@@ -12,15 +12,23 @@
       <template v-slot:top>
         <v-toolbar flat color="white">
           <v-toolbar-title>
-            <b>Kelola Perpanjangan</b>
-            <div>
-              <h6>*Proses data ke-1 terlebih dahulu</h6>
-            </div>
+            <!-- <b>Rekap Perpanjangan</b> -->
+            <v-text-field
+              v-model="search"
+              append-icon="mdi-magnify"
+              label="Search"
+              single-line
+              hide-details
+            ></v-text-field>
           </v-toolbar-title>
           <v-dialog v-model="dialog" max-width="800px">
             <v-card>
               <v-card-title>
                 <span class="headline">{{ isCreateTitle ? 'Create' : 'Tinjau' }} Perpanjangan</span>
+                <v-spacer></v-spacer>
+                <v-chip dark v-if="editedItem.status === 'REJECT'" color="error">Ditolak</v-chip>
+                <v-chip dark v-else-if="editedItem.status === 'PENDING'" color="warning">Menunggu</v-chip>
+                <v-chip dark v-else-if="editedItem.status === 'APPROVE'" color="success">Disetujui</v-chip>
               </v-card-title>
 
               <v-card-text>
@@ -51,16 +59,21 @@
                     <v-img :src="editedItem.sk_trayek" contain class="grey darken-4"></v-img>
                     <v-card-text>SK Trayek</v-card-text>
                   </v-card>
-                  <v-text-field v-model="editedItem.biaya" label="Biaya" prefix="Rp." class="mt-10"></v-text-field>
-                  <v-text-field v-model="editedItem.denda" label="Denda" prefix="Rp. "></v-text-field>
-                  <v-textarea label="Keterangan" v-model="editedItem.keterangan"></v-textarea>
+                  <v-text-field
+                    v-model="editedItem.biaya"
+                    label="Biaya"
+                    prefix="Rp."
+                    class="mt-10"
+                    readonly
+                  ></v-text-field>
+                  <v-text-field v-model="editedItem.denda" label="Denda" prefix="Rp. " readonly></v-text-field>
+                  <v-textarea label="Keterangan" v-model="editedItem.keterangan" readonly></v-textarea>
                 </v-container>
               </v-card-text>
 
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="error" @click="update('REJECT')">Tolak</v-btn>
-                <v-btn color="success" @click="update('APPROVE')">Setujui</v-btn>
+                <v-btn color="primary" @click="dialog = false">Close</v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>
@@ -77,6 +90,11 @@
             </v-card>
           </v-dialog>
         </v-toolbar>
+      </template>
+      <template v-slot:item.status="{ item }">
+        <v-chip dark v-if="item.status === 'REJECT'" color="error">Ditolak</v-chip>
+        <v-chip dark v-else-if="item.status === 'PENDING'" color="warning">Menunggu</v-chip>
+        <v-chip dark v-else-if="item.status === 'APPROVE'" color="success">Disetujui</v-chip>
       </template>
       <template v-slot:item.actions="{ item }">
         <v-btn color="primary" small class="white--text" @click="editItem(item)">
@@ -101,4 +119,4 @@
   </div>
 </template>
 
-<script lang="ts" src="./perpanjangan.ts"></script>
+<script lang="ts" src="./result.ts"></script>
