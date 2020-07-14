@@ -9,7 +9,7 @@
       <v-col cols="12">
         <v-card color="primary" dark>
           <v-card-title class="headline">
-            <h1>120</h1>
+            <h1>0</h1>
           </v-card-title>
           <v-card-subtitle class="mt-1">
             <h3>Data Perpanjangan Diterima</h3>
@@ -19,7 +19,7 @@
       <v-col cols="12">
         <v-card color="primary" dark>
           <v-card-title class="headline">
-            <h1>21</h1>
+            <h1>0</h1>
           </v-card-title>
           <v-card-subtitle class="mt-1">
             <h3>Data Perpanjangan Ditolak</h3>
@@ -29,7 +29,7 @@
       <v-col cols="12">
         <v-card color="primary" dark>
           <v-card-title class="headline">
-            <h1>32</h1>
+            <h1>0</h1>
           </v-card-title>
           <v-card-subtitle class="mt-1">
             <h3>Data Perpanjangan Belum Diproses</h3>
