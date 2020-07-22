@@ -92,65 +92,55 @@ export default class Pengajuan extends Vue {
   }
 
   async SelectedKpLama(event: any) {
-    console.info(event);
     const fd: any = new FormData();
     fd.append('image', event, event.name);
     await axios
       .post('http://localhost:3000/perpanjangan/upload', fd)
       .then((res) => {
-        console.info(res);
         this.perpanjanganItem.kp_lama =
           'http://localhost:3000/perpanjangan/image/' + res.data.filename;
       });
   }
 
   async SelectedJasaRaharja(event: any) {
-    console.info(event);
     const fd: any = new FormData();
     fd.append('image', event, event.name);
     await axios
       .post('http://localhost:3000/perpanjangan/upload', fd)
       .then((res) => {
-        console.info(res);
         this.perpanjanganItem.jasa_raharja =
           'http://localhost:3000/perpanjangan/image/' + res.data.filename;
       });
   }
 
   async SelectedStnk(event: any) {
-    console.info(event);
     const fd: any = new FormData();
     fd.append('image', event, event.name);
     await axios
       .post('http://localhost:3000/perpanjangan/upload', fd)
       .then((res) => {
-        console.info(res);
         this.perpanjanganItem.stnk =
           'http://localhost:3000/perpanjangan/image/' + res.data.filename;
       });
   }
 
   async SelectedSuratRekomendasi(event: any) {
-    console.info(event);
     const fd: any = new FormData();
     fd.append('image', event, event.name);
     await axios
       .post('http://localhost:3000/perpanjangan/upload', fd)
       .then((res) => {
-        console.info(res);
         this.perpanjanganItem.surat_rekomendasi =
           'http://localhost:3000/perpanjangan/image/' + res.data.filename;
       });
   }
 
   async SelectedSkTrayek(event: any) {
-    console.info(event);
     const fd: any = new FormData();
     fd.append('image', event, event.name);
     await axios
       .post('http://localhost:3000/perpanjangan/upload', fd)
       .then((res) => {
-        console.info(res);
         this.perpanjanganItem.sk_trayek =
           'http://localhost:3000/perpanjangan/image/' + res.data.filename;
       });
@@ -158,7 +148,6 @@ export default class Pengajuan extends Vue {
 
   async searchPerpanjangan() {
     const kode: string = this.kode;
-    console.info('idnya ', kode);
     PerpanjanganModule.fetchOnePerpanjangan(kode);
     this.search_mode = false;
   }

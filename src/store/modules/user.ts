@@ -52,8 +52,6 @@ class User extends VuexModule implements IUserStore {
 
       if (res && res.data) {
         this.SET_LOADING_FETCH_USER(false);
-        console.info('user res.data', res.data);
-
         this.SET_USERS(res.data);
       } else {
         this.SET_LOADING_FETCH_USER(false);
@@ -70,15 +68,12 @@ class User extends VuexModule implements IUserStore {
   @Action
   async fetchOneUser(kode: string) {
     try {
-      console.info('masuk module user: ', kode);
       this.CLEAN_ACTION();
       this.SET_LOADING_FETCH_USER(true);
       const res: any = await fetchOneUser(kode);
 
       if (res && res.data) {
         this.SET_LOADING_FETCH_USER(false);
-        console.info('perpanjangan res.data', res.data);
-
         this.SET_USERS(res.data);
       } else {
         this.SET_LOADING_FETCH_USER(false);
@@ -115,7 +110,6 @@ class User extends VuexModule implements IUserStore {
   @Action
   async updateOneUser(data: IUserData) {
     try {
-      console.info('action data', data);
       this.CLEAN_ACTION();
       this.SET_LOADING_UPDATE_USER(true);
       const res: any = await updateOneUser((data as any)._id, data);

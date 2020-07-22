@@ -110,16 +110,12 @@ export default class Perpanjangan extends Vue {
     this.getPerpanjanganList();
   }
 
-  // mounted() {
-  //   console.info(moment().format('LLL'));
-  // }
-
   get params() {
     return PerpanjanganModule.paramsPerpanjangan;
   }
 
   get perpanjangans() {
-    return PerpanjanganModule.perpanjangans;
+    return PerpanjanganModule.pendingPerpanjangans;
   }
 
   get users() {
@@ -139,7 +135,6 @@ export default class Perpanjangan extends Vue {
       (el: any) => el.kode_perpanjangan === item.kode_perpanjangan,
     );
 
-    console.info('index ke = ', arrayIndex);
     if (arrayIndex === 0) {
       UserModule.fetchOneUser(item.kode_perpanjangan);
       this.editedIndex = this.perpanjangans;

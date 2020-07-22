@@ -116,10 +116,6 @@ export default class Result extends Vue {
     this.getPerpanjanganList();
   }
 
-  // mounted() {
-  //   console.info(moment().format('LLL'));
-  // }
-
   get params() {
     return PerpanjanganModule.paramsPerpanjangan;
   }
@@ -141,20 +137,11 @@ export default class Result extends Vue {
   }
 
   editItem(item: any) {
-    // const arrayIndex = this.perpanjangans.findIndex(
-    //   (el: any) => el.kode_perpanjangan === item.kode_perpanjangan,
-    // );
-
-    // console.info('index ke = ', arrayIndex);
-    // if (arrayIndex === 0) {
     UserModule.fetchOneUser(item.kode_perpanjangan);
     this.editedIndex = this.perpanjangans;
     this.editedItem = Object.assign({}, item);
     this.isCreateTitle = false;
     this.dialog = true;
-    // } else {
-    //   this.alert = true;
-    // }
   }
 
   selectedImage(event: any) {

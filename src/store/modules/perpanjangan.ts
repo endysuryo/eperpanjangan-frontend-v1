@@ -39,6 +39,7 @@ class Perpanjangan extends VuexModule implements IPerpanjanganStore {
   isLoadingUpdatePerpanjangan = false;
   isLoadingDeletePerpanjangan = false;
   perpanjangans = [];
+  pendingPerpanjangans = [];
   paramsPerpanjangan = { ...initParams };
   isPerpanjanganError = false;
   perpanjanganErrorState = initErrorState;
@@ -55,8 +56,6 @@ class Perpanjangan extends VuexModule implements IPerpanjanganStore {
 
       if (res && res.data) {
         this.SET_LOADING_FETCH_PERPANJANGAN(false);
-        console.info('perpanjangan res.data', res.data);
-
         this.SET_PERPANJANGANS(res.data);
       } else {
         this.SET_LOADING_FETCH_PERPANJANGAN(false);
@@ -80,20 +79,18 @@ class Perpanjangan extends VuexModule implements IPerpanjanganStore {
 
       if (res && res.data) {
         this.SET_LOADING_FETCH_PERPANJANGAN(false);
-        console.info('perpanjangan res.data', res.data);
-
         const tempArray: any = res.data.filter((el: any) => {
           return el.status === 'PENDING';
         });
 
-        this.SET_PERPANJANGANS(tempArray);
+        this.SET_PENDING_PERPANJANGANS(tempArray);
       } else {
         this.SET_LOADING_FETCH_PERPANJANGAN(false);
-        this.SET_PERPANJANGANS([]);
+        this.SET_PENDING_PERPANJANGANS([]);
       }
     } catch (error) {
       this.SET_LOADING_FETCH_PERPANJANGAN(false);
-      this.SET_PERPANJANGANS([]);
+      this.SET_PENDING_PERPANJANGANS([]);
       this.SET_INDICATOR_ERROR_PERPANJANGAN(true);
       this.SET_ERROR_PERPANJANGAN(formatErrorMessage(error));
     }
@@ -102,15 +99,12 @@ class Perpanjangan extends VuexModule implements IPerpanjanganStore {
   @Action
   async fetchOnePerpanjangan(kode: string) {
     try {
-      console.info('masuk module perpanjangan: ', kode);
       this.CLEAN_ACTION();
       this.SET_LOADING_FETCH_PERPANJANGAN(true);
       const res: any = await fetchOnePerpanjangan(kode);
 
       if (res && res.data) {
         this.SET_LOADING_FETCH_PERPANJANGAN(false);
-        console.info('perpanjangan res.data', res.data);
-
         this.SET_PERPANJANGANS(res.data);
       } else {
         this.SET_LOADING_FETCH_PERPANJANGAN(false);
@@ -147,7 +141,6 @@ class Perpanjangan extends VuexModule implements IPerpanjanganStore {
   @Action
   async updateOnePerpanjangan(data: IPerpanjanganData) {
     try {
-      console.info('action data', data);
       this.CLEAN_ACTION();
       this.SET_LOADING_UPDATE_PERPANJANGAN(true);
       const res: any = await updateOnePerpanjangan((data as any)._id, data);
@@ -181,6 +174,11 @@ class Perpanjangan extends VuexModule implements IPerpanjanganStore {
       this.SET_INDICATOR_ERROR_PERPANJANGAN(true);
       this.SET_ERROR_PERPANJANGAN(formatErrorMessage(error));
     }
+  }
+
+  @Mutation
+  SET_PENDING_PERPANJANGANS(payload: []) {
+    this.pendingPerpanjangans = payload;
   }
 
   @Mutation
