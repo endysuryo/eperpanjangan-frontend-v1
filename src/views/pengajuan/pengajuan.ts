@@ -5,7 +5,7 @@ import { Hooper, Navigation, Slide } from 'hooper';
 import 'hooper/dist/hooper.css';
 import moment from 'moment';
 import Vue from 'vue';
-import { Component } from 'vue-property-decorator';
+import { Component, Watch } from 'vue-property-decorator';
 import { IPerpanjanganData } from '../../common/interface/perpanjangan.interface';
 import HeaderPage from '../../components/HeaderPage.vue';
 import { PerpanjanganModule } from '../../store/modules/perpanjangan';
@@ -41,7 +41,7 @@ export default class Pengajuan extends Vue {
     stnk: '',
     surat_rekomendasi: '',
     sk_trayek: '',
-    biaya: '',
+    biaya: 0,
     denda: '',
     status: 'PENDING',
     keterangan: '',
@@ -54,9 +54,43 @@ export default class Pengajuan extends Vue {
   create_mode: boolean = false;
   dialog: boolean = false;
   kode: string = '';
+  angkutans: any = [
+    {
+      name: 'Bus Besar',
+      biaya: 100000,
+    },
+    {
+      name: 'Bus Sedang',
+      biaya: 75000,
+    },
+    {
+      name: 'Bus Kecil',
+      biaya: 50000,
+    },
+    {
+      name: 'AJDP',
+      biaya: 0,
+    },
+    {
+      name: 'Taxi Konvensional',
+      biaya: 0,
+    },
+    {
+      name: 'A5K',
+      biaya: 0,
+    },
+  ];
 
   created() {
     this.getPerpanjanganList();
+  }
+
+  @Watch('perpanjanganItem.jenis_angkutan')
+  changeBiaya() {
+    const findBiaya = this.angkutans.find((el: any) => {
+      return el.name === this.perpanjanganItem.jenis_angkutan;
+    });
+    this.perpanjanganItem.biaya = findBiaya.biaya;
   }
 
   get params() {

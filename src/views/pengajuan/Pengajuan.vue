@@ -115,7 +115,17 @@
           <h2>Data Pengajuan</h2>
         </div>
         <div>
-          <v-text-field label="Jenis Angkutan" outlined v-model="perpanjanganItem.jenis_angkutan"></v-text-field>
+          <v-select
+            label="Jenis Angkutan"
+            outlined
+            v-model="perpanjanganItem.jenis_angkutan"
+            :items="angkutans"
+            item-text="name"
+            item-value="name"
+          ></v-select>
+        </div>
+        <div>
+          <v-text-field label="Biaya" outlined v-model="perpanjanganItem.biaya" prefix="Rp. "></v-text-field>
         </div>
         <div>
           <v-text-field label="Nama PO" outlined v-model="perpanjanganItem.nama_po"></v-text-field>
