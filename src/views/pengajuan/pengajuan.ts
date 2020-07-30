@@ -42,7 +42,7 @@ export default class Pengajuan extends Vue {
     surat_rekomendasi: '',
     sk_trayek: '',
     biaya: 0,
-    denda: '',
+    denda: 0,
     status: 'PENDING',
     keterangan: '',
     approve_at: '',
@@ -80,6 +80,9 @@ export default class Pengajuan extends Vue {
       biaya: 0,
     },
   ];
+  date: any = new Date().toISOString().substr(0, 10);
+  modal: boolean = false;
+  dif_date: string = '';
 
   created() {
     this.getPerpanjanganList();
@@ -91,6 +94,38 @@ export default class Pengajuan extends Vue {
       return el.name === this.perpanjanganItem.jenis_angkutan;
     });
     this.perpanjanganItem.biaya = findBiaya.biaya;
+  }
+
+  @Watch('date')
+  changeDenda() {
+    const dif = moment(this.date)
+      .startOf('day')
+      .fromNow();
+    console.info('dif: ', dif);
+    if (dif.includes('yang lalu')) {
+      if (dif.includes('sebulan')) {
+        this.dif_date = '1 Bulan';
+        this.perpanjanganItem.denda = '10000';
+      } else if (dif.includes('bulan')) {
+        this.dif_date = dif.slice(0, 2) + ' Bulan';
+        this.perpanjanganItem.denda = (
+          Number(dif.slice(0, 2)) * 10000
+        ).toString();
+      } else if (dif.includes('tahun')) {
+        this.dif_date = dif.slice(0, 2) + ' Tahun';
+        this.perpanjanganItem.denda = (
+          Number(dif.slice(0, 2)) *
+          12 *
+          10000
+        ).toString();
+      } else {
+        this.dif_date = '';
+        this.perpanjanganItem.denda = '0';
+      }
+    } else {
+      this.dif_date = '';
+      this.perpanjanganItem.denda = '0';
+    }
   }
 
   get params() {

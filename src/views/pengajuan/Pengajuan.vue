@@ -125,7 +125,49 @@
           ></v-select>
         </div>
         <div>
-          <v-text-field label="Biaya" outlined v-model="perpanjanganItem.biaya" prefix="Rp. "></v-text-field>
+          <v-text-field
+            label="Biaya"
+            outlined
+            v-model="perpanjanganItem.biaya"
+            prefix="Rp. "
+            readonly
+          ></v-text-field>
+        </div>
+        <div>
+          <v-dialog ref="dialog" v-model="modal" :return-value.sync="date" persistent width="290px">
+            <template v-slot:activator="{ on, attrs }">
+              <v-text-field
+                v-model="date"
+                label="Tanggal Habis KP"
+                prepend-icon="mdi-calendar"
+                readonly
+                v-bind="attrs"
+                v-on="on"
+                outlined
+              ></v-text-field>
+            </template>
+            <v-date-picker v-model="date" scrollable>
+              <v-spacer></v-spacer>
+              <v-btn text color="primary" @click="modal = false">Cancel</v-btn>
+              <v-btn text color="primary" @click="$refs.dialog.save(date)">OK</v-btn>
+            </v-date-picker>
+          </v-dialog>
+        </div>
+        <v-card v-if="dif_date != ''">
+          <v-card-text class="d-flex">
+            Terlambat
+            <v-spacer></v-spacer>
+            <v-chip color="red" text-color="white">{{ dif_date }}</v-chip>
+          </v-card-text>
+        </v-card>
+        <div>
+          <v-text-field
+            label="Denda"
+            outlined
+            v-model="perpanjanganItem.denda"
+            prefix="Rp. "
+            readonly
+          ></v-text-field>
         </div>
         <div>
           <v-text-field label="Nama PO" outlined v-model="perpanjanganItem.nama_po"></v-text-field>
@@ -133,25 +175,38 @@
         <div>
           <v-text-field label="TNKB" outlined v-model="perpanjanganItem.tnkb"></v-text-field>
         </div>
+        <div class="mb-5 mt-5">
+          <h2>Upload Dokumen</h2>
+        </div>
         <div>
-          <v-file-input label="KP Lama" outlined prepend-icon="mdi-camera" @change="SelectedKpLama"></v-file-input>
+          <v-file-input
+            label="KP Lama"
+            outlined
+            prepend-icon="mdi-file-document"
+            @change="SelectedKpLama"
+          ></v-file-input>
         </div>
         <div>
           <v-file-input
             label="Jasa Raharja"
             outlined
-            prepend-icon="mdi-camera"
+            prepend-icon="mdi-file-document"
             @change="SelectedJasaRaharja"
           ></v-file-input>
         </div>
         <div>
-          <v-file-input label="STNK" outlined prepend-icon="mdi-camera" @change="SelectedStnk"></v-file-input>
+          <v-file-input
+            label="STNK"
+            outlined
+            prepend-icon="mdi-file-document"
+            @change="SelectedStnk"
+          ></v-file-input>
         </div>
         <div>
           <v-file-input
             label="Surat Rekomendasi"
             outlined
-            prepend-icon="mdi-camera"
+            prepend-icon="mdi-file-document"
             @change="SelectedSuratRekomendasi"
           ></v-file-input>
         </div>
@@ -159,7 +214,7 @@
           <v-file-input
             label="SK Trayek"
             outlined
-            prepend-icon="mdi-camera"
+            prepend-icon="mdi-file-document"
             @change="SelectedSkTrayek"
           ></v-file-input>
         </div>
